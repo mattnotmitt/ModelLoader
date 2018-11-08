@@ -4,14 +4,14 @@
 
 #include "Cell.h"
 
-Cell::Cell(vector<Vector3D> CellVertices, Material CellMaterial)
-    : CellVertices(move(CellVertices)), CellMaterial(CellMaterial) {};
+Cell::Cell(std::vector<Vec3> CellVertices, Material CellMaterial)
+    : CellVertices(std::move(CellVertices)), CellMaterial(CellMaterial) {};
 
-const vector<Vector3D> &Cell::getCellVertices() const {
+const std::vector<Vec3> &Cell::getCellVertices() const {
     return CellVertices;
 }
 
-void Cell::setCellVertices(const vector<Vector3D> &CellVertices) {
+void Cell::setCellVertices(const std::vector<Vec3> &CellVertices) {
     Cell::CellVertices = CellVertices;
 }
 
@@ -23,11 +23,11 @@ void Cell::setVolume(float Volume) {
     Cell::Volume = Volume;
 }
 
-const Vector3D &Cell::getCentreOfGravity() const {
+const Vec3 &Cell::getCentreOfGravity() const {
     return CentreOfGravity;
 }
 
-void Cell::setCentreOfGravity(const Vector3D &CentreOfGravity) {
+void Cell::setCentreOfGravity(const Vec3 &CentreOfGravity) {
     Cell::CentreOfGravity = CentreOfGravity;
 }
 

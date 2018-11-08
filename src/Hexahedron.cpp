@@ -4,8 +4,8 @@
 
 #include "Hexahedron.h"
 
-Hexahedron::Hexahedron(const vector<Vector3D> &CellVertices, Material CellMaterial)
-: Cell(CellVertices, CellMaterial) {
+Hexahedron::Hexahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial)
+: Cell::Cell(CellVertices, CellMaterial) {
     Cell::setVolume(Hexahedron::calcVolume());
     Cell::setCentreOfGravity(Hexahedron::calcCentreofGravity());
     Cell::setWeight(Hexahedron::calcWeight());
@@ -14,23 +14,23 @@ Hexahedron::Hexahedron(const vector<Vector3D> &CellVertices, Material CellMateri
 Hexahedron::~Hexahedron() = default;
 
 float Hexahedron::calcVolume() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
-    float volume;
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
+    float volume = 0;
     // TODO: Write function which will return volume of hexahedron from array of vertices
     return volume;
 };
 
-Vector3D Hexahedron::calcCentreofGravity() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
-    Vector3D cog;
+Vec3 Hexahedron::calcCentreofGravity() const {
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
+    Vec3 cog;
     // TODO: Write function which will return centre of gravity of hexahedron from array of vertices
     return cog;
 }
 
 float Hexahedron::calcWeight() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
     const Material material = Cell::getCellMaterial();
-    float weight;
-    // TODO: Write function which will return weight of hexahedron from array of vertices
+    const float volume = Cell::getVolume();
+    float weight = 0;
+    // TODO: Write function which will return weight of hexahedron from volume and material
     return weight;
 }

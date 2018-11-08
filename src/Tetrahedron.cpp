@@ -4,7 +4,7 @@
 
 #include "Tetrahedron.h"
 
-Tetrahedron::Tetrahedron(const vector<Vector3D> &CellVertices, Material CellMaterial)
+Tetrahedron::Tetrahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial)
 : Cell(CellVertices, CellMaterial) {
     Cell::setVolume(Tetrahedron::calcVolume());
     Cell::setCentreOfGravity(Tetrahedron::calcCentreofGravity());
@@ -14,23 +14,23 @@ Tetrahedron::Tetrahedron(const vector<Vector3D> &CellVertices, Material CellMate
 Tetrahedron::~Tetrahedron() = default;
 
 float Tetrahedron::calcVolume() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;
     // TODO: Write function which will return volume of tetrahedron from array of vertices
     return volume;
 }
 
-Vector3D Tetrahedron::calcCentreofGravity() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
-    Vector3D cog;
+Vec3 Tetrahedron::calcCentreofGravity() const {
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
+    Vec3 cog;
     // TODO: Write function which will return centre of gravity of tetrahedron from array of vertices
     return cog;
 }
 
 float Tetrahedron::calcWeight() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
     const Material material = Cell::getCellMaterial();
-    float weight;
-    // TODO: Write function which will return weight of tetrahedron from array of vertices
+    const float volume = Cell::getVolume();
+    float weight = 0;
+    // TODO: Write function which will return weight of tetrahedron from volume and material
     return weight;
 }

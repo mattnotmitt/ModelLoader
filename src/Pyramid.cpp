@@ -4,7 +4,7 @@
 
 #include "Pyramid.h"
 
-Pyramid::Pyramid(const vector<Vector3D> &CellVertices, Material CellMaterial)
+Pyramid::Pyramid(const std::vector<Vec3> &CellVertices, Material CellMaterial)
 : Cell(CellVertices, CellMaterial) {
     Pyramid::setVolume(Pyramid::calcVolume());
     Pyramid::setCentreOfGravity(Pyramid::calcCentreofGravity());
@@ -14,23 +14,23 @@ Pyramid::Pyramid(const vector<Vector3D> &CellVertices, Material CellMaterial)
 Pyramid::~Pyramid() = default;
 
 float Pyramid::calcVolume() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;
     // TODO: Write function which will return volume of pyramid from array of vertices
     return volume;
 }
 
-Vector3D Pyramid::calcCentreofGravity() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
-    Vector3D cog;
+Vec3 Pyramid::calcCentreofGravity() const {
+    const std::vector<Vec3> vertices = Cell::getCellVertices();
+    Vec3 cog;
     // TODO: Write function which will return centre of gravity of pyramid from array of vertices
     return cog;
 }
 
 float Pyramid::calcWeight() const {
-    const vector<Vector3D> vertices = Cell::getCellVertices();
     const Material material = Cell::getCellMaterial();
-    float weight;
-    // TODO: Write function which will return weight of pyramid from array of vertices
+    const float volume = Cell::getVolume();
+    float weight = 0;
+    // TODO: Write function which will return weight of pyramid from volume and material
     return weight;
 }
