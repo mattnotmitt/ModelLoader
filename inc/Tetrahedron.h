@@ -9,7 +9,7 @@
 class Tetrahedron : public Cell {
 public:
     Tetrahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial);
-    ~Tetrahedron() override;
+    ~Tetrahedron() override = default;
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)

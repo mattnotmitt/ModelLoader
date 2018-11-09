@@ -9,7 +9,7 @@
 class Hexahedron : public Cell {
 public:
     Hexahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial);
-    ~Hexahedron() override;
+    ~Hexahedron() override = default;
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)
