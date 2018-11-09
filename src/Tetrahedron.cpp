@@ -11,8 +11,6 @@ Tetrahedron::Tetrahedron(const std::vector<Vec3> &CellVertices, Material CellMat
     Cell::setWeight(Tetrahedron::calcWeight());
 }
 
-Tetrahedron::~Tetrahedron() = default;
-
 float Tetrahedron::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;

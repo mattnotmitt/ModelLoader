@@ -11,8 +11,6 @@ Pyramid::Pyramid(const std::vector<Vec3> &CellVertices, Material CellMaterial)
     Pyramid::setWeight(Pyramid::calcWeight());
 }
 
-Pyramid::~Pyramid() = default;
-
 float Pyramid::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;

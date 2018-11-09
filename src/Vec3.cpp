@@ -2,12 +2,8 @@
 // Created by matt on 08/11/18.
 //
 
-#include <Vec3.h>
-
 #include "Vec3.h"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 Vec3::Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vec3 Vec3::operator+(const Vec3 &right) {
@@ -53,5 +49,31 @@ void Vec3::setZ(float z) {
     Vec3::z = z;
 }
 
+bool Vec3::operator==(const Vec3 &rhs) const {
+    return x == rhs.x &&
+           y == rhs.y &&
+           z == rhs.z;
+}
 
-#pragma clang diagnostic pop
+bool Vec3::operator!=(const Vec3 &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream& operator<<(std::ostream& os, const Vec3& vec)
+{
+    os << '[' << vec.getX() << ',' << vec.getY() << ',' << vec.getZ() << ']';
+    return os;
+}
+
+TEST_CASE( "Vec3s can be added", "[Vec3]" ) {
+    SECTION("Default vectors") {
+        REQUIRE(Vec3() + Vec3() == Vec3());
+    }
+    SECTION("Default vectors + instantiated vectors") {
+        REQUIRE(Vec3(1, 2, 3) + Vec3() == Vec3(1, 2, 3));
+        REQUIRE(Vec3() + Vec3(1, 2, 3) == Vec3(1, 2, 3));
+    }
+    SECTION("Normal operation") {
+        REQUIRE(Vec3(1, 1, 1) + Vec3(1, 1, 1) == Vec3(2, 2, 2));
+    }
+}

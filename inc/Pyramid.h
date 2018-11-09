@@ -9,7 +9,7 @@
 class Pyramid : public Cell {
 public:
     Pyramid(const std::vector<Vec3> &CellVertices, Material CellMaterial);
-    ~Pyramid() override;
+    ~Pyramid() override = default;
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)

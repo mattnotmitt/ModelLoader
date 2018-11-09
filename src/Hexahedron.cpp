@@ -11,8 +11,6 @@ Hexahedron::Hexahedron(const std::vector<Vec3> &CellVertices, Material CellMater
     Cell::setWeight(Hexahedron::calcWeight());
 }
 
-Hexahedron::~Hexahedron() = default;
-
 float Hexahedron::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume = 0;

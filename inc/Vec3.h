@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include <iostream>
+#include "catch.hpp"
+
 class Vec3 {
 private:
     float x;
@@ -12,6 +15,10 @@ private:
 public:
     Vec3() : x(0), y(0), z(0) {};
     Vec3(float x, float y, float z);
+
+    bool operator==(const Vec3 &rhs) const;
+    bool operator!=(const Vec3 &rhs) const;
+    friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
 
     float getX() const;
     float getY() const;

@@ -18,7 +18,7 @@ private:
 
 public:
     explicit Cell(std::vector<Vec3> CellVertices, Material material);
-    virtual ~Cell() = 0;
+    virtual ~Cell() = default;
 
     /**
      * Get vertices of Cell instance
