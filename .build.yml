@@ -1,18 +1,18 @@
 image: archlinux
 packages: 
-  - g++
-  - cmake
+    - g++
+    - cmake
 sources:
-  - https://github.com/artemisbot/ModelLoader
+    - https://github.com/artemisbot/ModelLoader
 secrets:
-  - 78ae6d85-5fc6-4127-a6ac-18edc14f0fcc
+    - 78ae6d85-5fc6-4127-a6ac-18edc14f0fcc
 tasks:
-  - setup: |
-    cd ModelLoader
-    mkdir build
-    cd build
-    cmake ..
-  - build: |
-    cd ModelLoader
-    cd build
-    make ModelLoaderTest
+    - setup: |
+        cd ModelLoader
+        mkdir build
+        cd build
+        cmake ..
+    - build: |
+        cd ModelLoader
+        cd build
+        make ModelLoaderTest
