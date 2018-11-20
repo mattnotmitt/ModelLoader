@@ -4,12 +4,30 @@
 
 #include "Model.h"
 
-const std::vector<std::unique_ptr<Cell>> &Model::getCells() const {
-    return Cells;
+void Model::loadFile(std::string &filePath) {
+    std::ifstream infile(filePath);
+    std::string line;
+    while (std::getline(infile, line))
+    {
+        std::istringstream iss(line);
+        // TODO: Line processing logic
+    }
 }
 
-void Model::setCells(std::vector<std::unique_ptr<Cell>> &Cells) {
-    Model::Cells = std::move(Cells);
+const std::map<int, Material> &Model::getMaterials() const {
+    return Materials;
+}
+
+void Model::setMaterials(const std::map<int, Material> &Materials) {
+    Model::Materials = Materials;
+}
+
+void Model::setCells(const std::map<int, std::unique_ptr<Cell>> &Cells) {
+    Model::Cells = Cells;
+}
+
+const std::map<int, std::unique_ptr<Cell>> &Model::getCells() const {
+    return Cells;
 }
 
 Model::Model() = default;

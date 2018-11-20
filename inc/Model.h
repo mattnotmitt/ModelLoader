@@ -4,18 +4,35 @@
 
 #pragma once
 
-#include <vector>
+#include <map>
 #include <memory>
+#include <fstream>
+#include <sstream>
 
 #include "Cell.h"
+#include "Model.h"
 
 class Model {
 private:
-    std::vector<std::unique_ptr<Cell>> Cells;
+    std::map<int, std::unique_ptr<Cell>> Cells;
 public:
+
+
+private:
+    std::map<int, Material> Materials;
+public:
+    // Constructor & Destructor
     Model();
+    ~Model() = default;
 
-    const std::vector<std::unique_ptr<Cell>>& getCells() const;
+    // Getters
+    void setCells(const std::map<int, std::unique_ptr<Cell>> &Cells);
+    void setMaterials(const std::map<int, Material> &Materials);
 
-    void setCells(std::vector<std::unique_ptr<Cell>> &Cells);
+    // Setters
+    const std::map<int, std::unique_ptr<Cell>> &getCells() const;
+    const std::map<int, Material> &getMaterials() const;
+
+    // Main functions
+    void loadFile(std::string &filePath);
 };
