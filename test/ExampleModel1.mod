@@ -5,11 +5,11 @@
 # any line starting with a 'm' is a material definition a unique index for
 # the material is given next, followed by its density followed by its name
 
-# e.g. material 0 has a density of 8960 and is called copper 
-m 0 8960 copper
+        # e.g. material 0 has a density of 8960 and is called copper
+        m 0 8960 000000 copper
 
 # material 1 has a density of 2700 and is called aluminium
-m 1 2700 aluminium 
+        m 1 2700 ababab aluminium
 
 # Any line starting with a 'v' is a vertex (a vector)
 # the 1st, 2nd and 3rd are the x, y and z coordinates

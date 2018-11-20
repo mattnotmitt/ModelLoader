@@ -4,13 +4,6 @@
 
 #include "Tetrahedron.h"
 
-Tetrahedron::Tetrahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial)
-: Cell(CellVertices, CellMaterial) {
-    Cell::setVolume(Tetrahedron::calcVolume());
-    Cell::setCentreOfGravity(Tetrahedron::calcCentreofGravity());
-    Cell::setWeight(Tetrahedron::calcWeight());
-}
-
 float Tetrahedron::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;

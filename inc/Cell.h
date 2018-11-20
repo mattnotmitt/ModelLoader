@@ -4,21 +4,27 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Vec3.h"
 #include "Material.h"
-#include <vector>
 
 class Cell {
 private:
     std::vector<Vec3> CellVertices;
     Material CellMaterial;
-    float Volume;
+    float Volume = 0;
     Vec3 CentreOfGravity;
-    float Weight;
+    float Weight = 0;
 
 public:
+    Cell() = default;
+
+    explicit Cell(const Material &material) : CellMaterial(material) {};
     explicit Cell(std::vector<Vec3> CellVertices, Material material);
     virtual ~Cell() = default;
+
+    friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
 
     /**
      * Get vertices of Cell instance
@@ -39,7 +45,7 @@ public:
      * Get centre of gravity of Cell instance
      * @return Vec3 containing estimated centre of gravity location
      */
-    const Vec3& getCentreOfGravity() const;
+    const Vec3 getCentreOfGravity() const;
     /**
      * Get weight of Cell instance
      * @return weight of Cell instance
@@ -56,21 +62,6 @@ public:
      * @param CellMaterial
      */
     void setCellMaterial(const Material &CellMaterial);
-    /**
-     * Sets volume of cell instance
-     * @param Volume
-     */
-    void setVolume(float Volume);
-    /**
-     * Set centre of gravity of cell instance
-     * @param CentreOfGravity coordinates of centre of gravity
-     */
-    void setCentreOfGravity(const Vec3 &CentreOfGravity);
-    /**
-     * Set weight of cell instance
-     * @param Weight
-     */
-    void setWeight(float Weight);
 
     /**
      * Calculate volume of cell instance

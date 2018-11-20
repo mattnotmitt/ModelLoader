@@ -15,30 +15,6 @@ void Cell::setCellVertices(const std::vector<Vec3> &CellVertices) {
     Cell::CellVertices = CellVertices;
 }
 
-float Cell::getVolume() const {
-    return Volume;
-}
-
-void Cell::setVolume(float Volume) {
-    Cell::Volume = Volume;
-}
-
-const Vec3 &Cell::getCentreOfGravity() const {
-    return CentreOfGravity;
-}
-
-void Cell::setCentreOfGravity(const Vec3 &CentreOfGravity) {
-    Cell::CentreOfGravity = CentreOfGravity;
-}
-
-float Cell::getWeight() const {
-    return Weight;
-}
-
-void Cell::setWeight(float Weight) {
-    Cell::Weight = Weight;
-}
-
 const Material &Cell::getCellMaterial() const {
     return CellMaterial;
 }
@@ -46,3 +22,21 @@ const Material &Cell::getCellMaterial() const {
 void Cell::setCellMaterial(const Material &material) {
     Cell::CellMaterial = material;
 }
+
+float Cell::getVolume() const {
+    return this->calcVolume();
+}
+
+const Vec3 Cell::getCentreOfGravity() const {
+    return this->calcCentreofGravity();
+}
+
+float Cell::getWeight() const {
+    return this->calcWeight();
+}
+
+std::ostream &operator<<(std::ostream &os, const Cell &cell) {
+    os << "Made of material " << cell.getCellMaterial().getName() << " and has " << cell.getCellVertices().size()
+       << " vertices.";
+    return os;
+};
