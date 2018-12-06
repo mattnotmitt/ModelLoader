@@ -103,7 +103,14 @@ TEST_CASE("Determinant of a Matrix", "[Mat]"){
         == 0);
     }
     SECTION("Determinant of a Nonsingular matrix"){
-        REQUIRE(Mat(Vec3(1, 4, 7), Vec3(2, 5, 8), Vec3(3, 6, 9)).calcDet()
+        REQUIRE(Mat(Vec3(0, 3, 2), Vec3(-1, 2, 1), Vec3(-3, 3, 2)).calcDet()
+                == 3);
+    }
+}
+
+TEST_CASE("Transpose a Matrix", "[Mat]"){
+    SECTION("Normal operation"){
+        REQUIRE(Mat(Vec3(1, 2, 3), Vec3(1, 2, 3), Vec3(1, 2, 3))
                 == 0);
     }
 }

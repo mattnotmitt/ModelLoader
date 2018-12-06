@@ -36,9 +36,10 @@ public:
 
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);
-    Vec3 operator*(const float &right);
+    Vec3 operator*(const float& right);
     Vec3 operator*(const Vec3& right);
     Vec3 operator/(const Vec3& right);
+    Vec3 operator/(const float& right);
 
     double dot(const Vec3 &right);
 };

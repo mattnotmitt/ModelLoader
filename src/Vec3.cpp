@@ -28,6 +28,9 @@ Vec3 Vec3::operator*(const float &right) {
     return {x * right, y * right, z * right};
 }
 
+Vec3 Vec3::operator/(const float &right) {
+    return {x / right, y / right, z / right};
+}
 
 
 double Vec3::getX() const {

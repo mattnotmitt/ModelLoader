@@ -3,6 +3,8 @@
 //
 #pragma once
 
+#include <numeric>
+#include <array>
 #include "Vec3.h"
 
 class Mat {
@@ -30,8 +32,9 @@ public:
     Mat operator/(const Mat& right);
 
 
-    float calcDet();
-    Mat inverse(Mat &input);
+    double calcDet() const;
+    Mat inverse() const;
+    Mat transpose() const;
 
 
 

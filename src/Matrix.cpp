@@ -44,17 +44,17 @@ Mat Mat::operator*(const Mat &right){
     Vec3 Y(VecA.getY(), VecB.getY(), VecC.getY());
     Vec3 Z(VecA.getZ(), VecB.getZ(), VecC.getZ());
 
-    VecA.setX(X*right.VecA());
-    VecB.setX(X*right.VecB);
-    VecC.setX(X*right.VecC);
+    VecA.setX(X.dot(right.VecA));
+    VecB.setX(X.dot(right.VecB));
+    VecC.setX(X.dot(right.VecC));
 
-    VecA.setY(Y*right.VecA);
-    VecB.setY(Y*right.VecB);
-    VecC.setY(Y*right.VecC);
+    VecA.setY(Y.dot(right.VecA));
+    VecB.setY(Y.dot(right.VecB));
+    VecC.setY(Y.dot(right.VecC));
 
-    VecA.setZ(Z*right.VecA);
-    VecB.setZ(Z*right.VecB);
-    VecC.setZ(Z*right.VecC);
+    VecA.setZ(Z.dot(right.VecA));
+    VecB.setZ(Z.dot(right.VecB));
+    VecC.setZ(Z.dot(right.VecC));
 
 
     return {VecA, VecB, VecC};
@@ -71,39 +71,38 @@ Mat Mat::operator*(const float &right) {
 
 Mat Mat::operator/(const Mat &right) {
     Mat invRight;
-    invRight = inverse(right);
+    invRight = right.inverse();
 
-
-    return {this * invRight};
+    return {*this * invRight};
 }
 
-float Mat::calcDet(){
-    float a, b, c, d;
-    float det1, det2, det3, det4, det5, det6, det7, det8, det9;
+double Mat::calcDet() const{
+    double a, b, c, d;
+    std::array<double, 9> det{0};
 
     a = VecB.getY();
     b = VecC.getY();
     c = VecB.getZ();
     d = VecC.getZ();
 
-    det1 = a*d - b*c;
-    det1= det1*VecA.getX();
+    det[0] = a*d - b*c;
+    det[0]= det[0]*VecA.getX();
 
     a = VecA.getY();
     b = VecC.getY();
     c = VecA.getZ();
     d = VecC.getZ();
 
-    det2 = a*d - b*c;
-    det2= (-1)*det2*VecB.getX();
+    det[1] = a*d - b*c;
+    det[1]= (-1)*det[1]*VecB.getX();
 
     a = VecA.getY();
     b = VecB.getY();
     c = VecA.getZ();
     d = VecB.getZ();
 
-    det3 = a*d - b*c;
-    det3 = det3*VecB.getX();
+    det[2] = a*d - b*c;
+    det[2] = det[2]*VecB.getX();
 
     //----------------------
 
@@ -112,24 +111,24 @@ float Mat::calcDet(){
     c = VecB.getZ();
     d = VecC.getZ();
 
-    det4 = a*d - b*c;
-    det4 = (-1)*det4*VecA.getY();
+    det[3] = a*d - b*c;
+    det[3] = (-1)*det[3]*VecA.getY();
 
     a = VecA.getX();
     b = VecC.getX();
     c = VecA.getZ();
     d = VecC.getZ();
 
-    det5 = a*d - b*c;
-    det5 = det5*VecB.getY();
+    det[4] = a*d - b*c;
+    det[4] = det[4]*VecB.getY();
 
     a = VecA.getX();
     b = VecB.getX();
     c = VecA.getZ();
     d = VecB.getZ();
 
-    det6 = a*d - b*c;
-    det6 = (-1)*det6*VecB.getY();
+    det[5] = a*d - b*c;
+    det[5] = (-1)*det[5]*VecB.getY();
 
     //-----------------------
 
@@ -138,50 +137,49 @@ float Mat::calcDet(){
     c = VecB.getY();
     d = VecC.getY();
 
-    det7 = a*d - b*c;
-    det7 = det7*VecA.getZ();
+    det[6] = a*d - b*c;
+    det[6] = det[6]*VecA.getZ();
 
     a = VecA.getX();
     b = VecC.getX();
     c = VecA.getY();
     d = VecC.getY();
 
-    det8 = a*d - b*c;
-    det8 = (-1)*det8*VecB.getZ();
+    det[7] = a*d - b*c;
+    det[7] = (-1)*det[7]*VecB.getZ();
 
     a = VecA.getX();
     b = VecB.getX();
     c = VecA.getY();
     d = VecB.getY();
 
-    det9 = a*d - b*c;
-    det9 = det9*VecB.getZ();
+    det[8] = a*d - b*c;
+    det[8] = det[8]*VecB.getZ();
 
-    return {det1 + det2 + det3 + det4 + det5 + det6 + det7 + det7 + det8 + det9};
+    return std::accumulate(det.begin(),det.end(), 0.0);
 
 }
 
-Mat Mat::inverse(Mat &input){
-    float Det = calcDet();
-    float temp;
-    Mat out = input;
+Mat Mat::transpose() const{
+    Mat out = *this;
 
-    temp = input.VecB.getX();
-    input.VecB.setX(input.VecA.getY());
-    input.VecA.setY(temp);
+    out.VecB.setX(this->VecA.getY());
+    out.VecA.setY(this->VecB.getX());
 
-    temp = input.VecC.getX();
-    out.VecC.setX(input.VecA.getZ());
-    out.VecA.setZ(temp);
+    out.VecC.setX(this->VecA.getZ());
+    out.VecA.setZ(this->VecC.getX());
 
-    temp = input.VecC.getY();
-    out.VecC.setY(input.VecB.getZ());
-    out.VecB.setZ(temp);
+    out.VecC.setY(this->VecB.getZ());
+    out.VecB.setZ(this->VecC.getY());
 
-    out.setVecA(input.getVecA() * Det);
-    out.setVecA(input.getVecB() * Det);
-    out.setVecA(input.getVecC() * Det);
+    return {out};
 
+}
+
+Mat Mat::inverse() const{
+    double Det = calcDet();
+    Mat out = this->transpose();
+    out = out * Det;
     return {out};
 
 }
