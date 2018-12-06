@@ -5,7 +5,6 @@
 #pragma once
 
 #include <iostream>
-#include "catch.hpp"
 
 class Vec3 {
 private:
@@ -39,4 +38,6 @@ public:
     Vec3 operator-(const Vec3& right);
     Vec3 operator*(const Vec3& right);
     Vec3 operator/(const Vec3& right);
+
+    double dot(const Vec3 &right);
 };

@@ -10,12 +10,11 @@
 #include <sstream>
 #include <iostream>
 
-#include "catch.hpp"
-
 #include "Cell.h"
 #include "Hexahedron.h"
 #include "Material.h"
 #include "Model.h"
+#include "ModelRenderer.h"
 #include "Pyramid.h"
 #include "Tetrahedron.h"
 
@@ -24,12 +23,15 @@ class Model {
 private:
     std::map<int, std::unique_ptr<Cell>> Cells;
     std::map<int, Material> Materials;
+    std::map<int, Vec3> Vertices;
 public:
+    const std::map<int, Vec3> &getVertices() const;
+
+    void setVertices(const std::map<int, Vec3> &Vertices);
     // Constructor & Destructor
     Model() = default;
+    Model(std::string &filePath);
 
-    Model(std::map<int, std::unique_ptr<Cell>> &Cells, std::map<int, Material> &Materials)
-            : Cells(std::move(Cells)), Materials(std::move(Materials)) {};
 
     ~Model() = default;
 
@@ -43,4 +45,5 @@ public:
 
     // Main functions
     void loadFile(std::string &filePath);
+    ModelRenderer* render(int argc, char** argv);
 };

@@ -15,13 +15,14 @@ Vec3 Vec3::operator-(const Vec3 &right) {
 }
 
 Vec3 Vec3::operator*(const Vec3 &right) {
-    // TODO: Multiply two Vec3s
+    // TODO: Cross product of two Vec3
     return {};
 }
 
-Vec3 Vec3::operator/(const Vec3 &right) {
-    // TODO: Divide two Vec3s
-    return {};
+double Vec3::dot(const Vec3 &right) {
+    double prod;
+    // TODO: Dot product of two Vec3
+    return prod;
 }
 
 double Vec3::getX() const {
@@ -73,32 +74,4 @@ std::istream &operator>>(std::istream &is, Vec3 &vec) {
     vec.setZ(z);
 
     return is;
-}
-
-TEST_CASE( "Vec3 Addition", "[Vec3]" ) {
-    SECTION("Default vectors") {
-        REQUIRE(Vec3() + Vec3() == Vec3());
-    }
-    SECTION("Default vectors + instantiated vectors") {
-        REQUIRE(Vec3(1, 2, 3) + Vec3() == Vec3(1, 2, 3));
-        REQUIRE(Vec3() + Vec3(1, 2, 3) == Vec3(1, 2, 3));
-        REQUIRE(Vec3(0,0,0) + Vec3(0,0,0) == Vec3());
-    }
-    SECTION("Normal operation") {
-        REQUIRE(Vec3(1, 1, 1) + Vec3(1, 1, 1) == Vec3(2, 2, 2));
-    }
-}
-
-TEST_CASE( "Vec3 Subtraction", "[Vec3]" ) {
-    SECTION("Default vectors") {
-        REQUIRE(Vec3() - Vec3() == Vec3());
-    }
-    SECTION("Default vectors + instantiated vectors") {
-        REQUIRE(Vec3(1, 2, 3) - Vec3() == Vec3(1, 2, 3));
-        REQUIRE(Vec3() - Vec3(1, 2, 3) == Vec3(-1, -2, -3));
-        REQUIRE(Vec3(0, 0, 0) - Vec3(0, 0, 0) == Vec3());
-    }
-    SECTION("Normal operation") {
-        REQUIRE(Vec3(1, 1, 1) - Vec3(1, 1, 1) == Vec3(0, 0, 0));
-    }
 }

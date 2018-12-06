@@ -28,6 +28,8 @@ const std::string &Material::getColour() const {
 }
 
 void Material::setColour(const std::string &Colour) {
+    std::regex colourRegex("^(?:[0-9a-fA-F]{3}){1,2}$");
+    if (!(std::regex_match(Colour, colourRegex))) throw "Invalid colour string " + Colour + " for material.";
     Material::Colour = Colour;
 }
 
