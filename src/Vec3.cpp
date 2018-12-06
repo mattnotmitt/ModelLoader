@@ -14,16 +14,21 @@ Vec3 Vec3::operator-(const Vec3 &right) {
     return {x - right.x, y - right.y, z - right.z};
 }
 
-Vec3 Vec3::operator*(const Vec3 &right) {
-    // TODO: Cross product of two Vec3
-    return {};
+double Vec3::dot(const Vec3 &right) {
+    return x*right.x + y*right.y + z*right.z;
 }
 
-double Vec3::dot(const Vec3 &right) {
-    double prod;
-    // TODO: Dot product of two Vec3
-    return prod;
+Vec3 Vec3::operator/(const Vec3 &right) {
+    return {y * right.z - z * right.y,
+            z * right.x - x * right.z,
+            x * right.y - y * right.x};
 }
+
+Vec3 Vec3::operator*(const float &right) {
+    return {x * right, y * right, z * right};
+}
+
+
 
 double Vec3::getX() const {
     return x;
