@@ -14,15 +14,8 @@ Vec3 Vec3::operator-(const Vec3 &right) {
     return {x - right.x, y - right.y, z - right.z};
 }
 
-float Vec3::operator*(const Vec3 &right) {
-    return {x*right.x + y*right.y + z*right.z};
-}
-
-    return {x};
 double Vec3::dot(const Vec3 &right) {
-    double prod;
-    // TODO: Dot product of two Vec3
-    return prod;
+    return x*right.x + y*right.y + z*right.z;
 }
 
 Vec3 Vec3::operator/(const Vec3 &right) {
