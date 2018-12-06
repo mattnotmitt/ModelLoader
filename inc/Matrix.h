@@ -31,7 +31,7 @@ public:
 
 
     float calcDet();
-    Mat inverse();
+    Mat inverse(Mat &input);
 
 
 

@@ -11,13 +11,21 @@ Vec3 Vec3::operator+(const Vec3 &right) {
 }
 
 Vec3 Vec3::operator-(const Vec3 &right) {
-    // TODO: Subtract two Vec3s
-    return {};
+    return {x - right.x, y - right.y, z - right.z};
 }
 
-Vec3 Vec3::operator*(const Vec3 &right) {
-    // TODO: Multiply two Vec3s
-    return {};
+float Vec3::operator*(const Vec3 &right) {
+    return {x*right.x + y*right.y + z*right.z};
+}
+
+Vec3 Vec3::operator/(const Vec3 &right) {
+    return {y * right.z - z * right.y,
+            z * right.x - x * right.z,
+            x * right.y - y * right.x};
+}
+
+Vec3 Vec3::operator*(const float &right) {
+    return {x * right, y * right, z * right};
 }
 
 Vec3 Vec3::operator/(const Vec3 &right) {

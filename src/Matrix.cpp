@@ -38,12 +38,13 @@ Mat Mat::operator-(const Mat &right) {
     return {VecA - right.VecA, VecB - right.VecB, VecC - right.VecC};
 }
 
-Mat Mat::operator*(const Mat &right) {
+Mat Mat::operator*(const Mat &right){
+
     Vec3 X(VecA.getX(), VecB.getX(), VecC.getX());
     Vec3 Y(VecA.getY(), VecB.getY(), VecC.getY());
     Vec3 Z(VecA.getZ(), VecB.getZ(), VecC.getZ());
 
-    VecA.setX(X*right.VecA);
+    VecA.setX(X*right.VecA());
     VecB.setX(X*right.VecB);
     VecC.setX(X*right.VecC);
 
@@ -54,33 +55,26 @@ Mat Mat::operator*(const Mat &right) {
     VecA.setZ(Z*right.VecA);
     VecB.setZ(Z*right.VecB);
     VecC.setZ(Z*right.VecC);
+
 
     return {VecA, VecB, VecC};
 }
 
 Mat Mat::operator*(const float &right) {
-    Vec3 X(VecA.getX(), VecB.getX(), VecC.getX());
-    Vec3 Y(VecA.getY(), VecB.getY(), VecC.getY());
-    Vec3 Z(VecA.getZ(), VecB.getZ(), VecC.getZ());
 
-    VecA.setX(X*right.VecA);
-    VecB.setX(X*right.VecB);
-    VecC.setX(X*right.VecC);
-
-    VecA.setY(Y*right.VecA);
-    VecB.setY(Y*right.VecB);
-    VecC.setY(Y*right.VecC);
-
-    VecA.setZ(Z*right.VecA);
-    VecB.setZ(Z*right.VecB);
-    VecC.setZ(Z*right.VecC);
+    VecA * right;
+    VecB * right;
+    VecC * right;
 
     return {VecA, VecB, VecC};
 }
 
 Mat Mat::operator/(const Mat &right) {
-    // TODO: Divide two Mats
-    return {};
+    Mat invRight;
+    invRight = inverse(right);
+
+
+    return {this * invRight};
 }
 
 float Mat::calcDet(){
@@ -167,24 +161,27 @@ float Mat::calcDet(){
 
 }
 
-Mat Mat::inverse(){
+Mat Mat::inverse(Mat &input){
     float Det = calcDet();
     float temp;
+    Mat out = input;
 
-    temp = VecB.getX();
-    VecB.setX(VecA.getY());
-    VecA.setY(temp);
+    temp = input.VecB.getX();
+    input.VecB.setX(input.VecA.getY());
+    input.VecA.setY(temp);
 
-    temp = VecC.getX();
-    VecC.setX(VecA.getZ());
-    VecA.setZ(temp);
+    temp = input.VecC.getX();
+    out.VecC.setX(input.VecA.getZ());
+    out.VecA.setZ(temp);
 
-    temp = VecC.getY();
-    VecC.setY(VecB.getZ());
-    VecB.setZ(temp);
+    temp = input.VecC.getY();
+    out.VecC.setY(input.VecB.getZ());
+    out.VecB.setZ(temp);
 
+    out.setVecA(input.getVecA() * Det);
+    out.setVecA(input.getVecB() * Det);
+    out.setVecA(input.getVecC() * Det);
 
-
-
+    return {out};
 
 }
