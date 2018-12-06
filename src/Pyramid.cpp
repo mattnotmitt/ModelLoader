@@ -4,13 +4,6 @@
 
 #include "Pyramid.h"
 
-Pyramid::Pyramid(const std::vector<Vec3> &CellVertices, Material CellMaterial)
-: Cell(CellVertices, CellMaterial) {
-    Pyramid::setVolume(Pyramid::calcVolume());
-    Pyramid::setCentreOfGravity(Pyramid::calcCentreofGravity());
-    Pyramid::setWeight(Pyramid::calcWeight());
-}
-
 float Pyramid::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume;

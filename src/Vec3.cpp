@@ -4,7 +4,7 @@
 
 #include "Vec3.h"
 
-Vec3::Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
+Vec3::Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
 
 Vec3 Vec3::operator+(const Vec3 &right) {
     return {x + right.x, y + right.y, z + right.z};
@@ -18,6 +18,13 @@ float Vec3::operator*(const Vec3 &right) {
     return {x*right.x + y*right.y + z*right.z};
 }
 
+    return {x};
+double Vec3::dot(const Vec3 &right) {
+    double prod;
+    // TODO: Dot product of two Vec3
+    return prod;
+}
+
 Vec3 Vec3::operator/(const Vec3 &right) {
     return {y * right.z - z * right.y,
             z * right.x - x * right.z,
@@ -28,32 +35,29 @@ Vec3 Vec3::operator*(const float &right) {
     return {x * right, y * right, z * right};
 }
 
-Vec3 Vec3::operator/(const Vec3 &right) {
-    // TODO: Divide two Vec3s
-    return {};
-}
 
-float Vec3::getX() const {
+
+double Vec3::getX() const {
     return x;
 }
 
-void Vec3::setX(float x) {
+void Vec3::setX(double x) {
     Vec3::x = x;
 }
 
-float Vec3::getY() const {
+double Vec3::getY() const {
     return y;
 }
 
-void Vec3::setY(float y) {
+void Vec3::setY(double y) {
     Vec3::y = y;
 }
 
-float Vec3::getZ() const {
+double Vec3::getZ() const {
     return z;
 }
 
-void Vec3::setZ(float z) {
+void Vec3::setZ(double z) {
     Vec3::z = z;
 }
 
@@ -73,15 +77,13 @@ std::ostream& operator<<(std::ostream& os, const Vec3& vec)
     return os;
 }
 
-TEST_CASE( "Vec3s can be added", "[Vec3]" ) {
-    SECTION("Default vectors") {
-        REQUIRE(Vec3() + Vec3() == Vec3());
-    }
-    SECTION("Default vectors + instantiated vectors") {
-        REQUIRE(Vec3(1, 2, 3) + Vec3() == Vec3(1, 2, 3));
-        REQUIRE(Vec3() + Vec3(1, 2, 3) == Vec3(1, 2, 3));
-    }
-    SECTION("Normal operation") {
-        REQUIRE(Vec3(1, 1, 1) + Vec3(1, 1, 1) == Vec3(2, 2, 2));
-    }
+std::istream &operator>>(std::istream &is, Vec3 &vec) {
+    double x, y, z;
+    is >> x >> y >> z;
+
+    vec.setX(x);
+    vec.setY(y);
+    vec.setZ(z);
+
+    return is;
 }

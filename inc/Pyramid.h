@@ -8,7 +8,12 @@
 
 class Pyramid : public Cell {
 public:
-    Pyramid(const std::vector<Vec3> &CellVertices, Material CellMaterial);
+    Pyramid() = default;
+
+    Pyramid(const Material &CellMaterial) : Cell(CellMaterial) {};
+
+    Pyramid(const std::vector<Vec3> &CellVertices, const Material &CellMaterial)
+            : Cell(CellVertices, CellMaterial) {};
     ~Pyramid() override = default;
 
     // const keyword disallows modification of class by function

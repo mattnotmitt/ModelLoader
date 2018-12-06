@@ -8,7 +8,12 @@
 
 class Hexahedron : public Cell {
 public:
-    Hexahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial);
+    Hexahedron() = default;
+
+    Hexahedron(const Material &CellMaterial) : Cell(CellMaterial) {};
+
+    Hexahedron(const std::vector<Vec3> &CellVertices, const Material &CellMaterial)
+            : Cell::Cell(CellVertices, CellMaterial) {}
     ~Hexahedron() override = default;
 
     // const keyword disallows modification of class by function

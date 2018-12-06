@@ -4,13 +4,6 @@
 
 #include "Hexahedron.h"
 
-Hexahedron::Hexahedron(const std::vector<Vec3> &CellVertices, Material CellMaterial)
-: Cell::Cell(CellVertices, CellMaterial) {
-    Cell::setVolume(Hexahedron::calcVolume());
-    Cell::setCentreOfGravity(Hexahedron::calcCentreofGravity());
-    Cell::setWeight(Hexahedron::calcWeight());
-}
-
 float Hexahedron::calcVolume() const {
     const std::vector<Vec3> vertices = Cell::getCellVertices();
     float volume = 0;

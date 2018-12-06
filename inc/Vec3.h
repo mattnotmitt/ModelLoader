@@ -5,32 +5,40 @@
 #pragma once
 
 #include <iostream>
-#include "catch.hpp"
 
 class Vec3 {
 private:
-    float x;
-    float y;
-    float z;
+    double x;
+    double y;
+    double z;
 public:
     Vec3() : x(0), y(0), z(0) {};
-    Vec3(float x, float y, float z);
+
+    Vec3(double x, double y, double z);
 
     bool operator==(const Vec3 &rhs) const;
     bool operator!=(const Vec3 &rhs) const;
     friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
 
-    float getX() const;
-    float getY() const;
-    float getZ() const;
+    friend std::istream &operator>>(std::istream &is, Vec3 &vec);
 
-    void setX(float x);
-    void setY(float y);
-    void setZ(float z);
+    double getX() const;
+
+    double getY() const;
+
+    double getZ() const;
+
+    void setX(double x);
+
+    void setY(double y);
+
+    void setZ(double z);
 
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);
     Vec3 operator*(const float &right);
     Vec3 operator*(const Vec3& right);
     Vec3 operator/(const Vec3& right);
+
+    double dot(const Vec3 &right);
 };
