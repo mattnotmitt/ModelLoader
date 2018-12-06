@@ -14,7 +14,6 @@
 #include "Hexahedron.h"
 #include "Material.h"
 #include "Model.h"
-#include "ModelRenderer.h"
 #include "Pyramid.h"
 #include "Tetrahedron.h"
 
@@ -45,5 +44,4 @@ public:
 
     // Main functions
     void loadFile(std::string &filePath);
-    ModelRenderer* render(int argc, char** argv);
 };

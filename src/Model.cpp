@@ -126,7 +126,3 @@ void Model::setCells(std::map<int, std::unique_ptr<Cell>> &Cells) {
 void Model::setVertices(const std::map<int, Vec3> &Vertices) {
     Model::Vertices = Vertices;
 }
-
-ModelRenderer* Model::render(int argc, char **argv) {
-    return new ModelRenderer(argc, argv);
-}

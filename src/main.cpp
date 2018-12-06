@@ -13,7 +13,6 @@ int main (int argc, char** argv) {
             << ExampleModel1.getCells().size() << " cells, " 
             << ExampleModel1.getVertices().size() << " vertices & " 
             << ExampleModel1.getMaterials().size() << " materials." << std::endl;
-        ExampleModel1.render(argc, argv);
     } catch (std::runtime_error &e) {
         throw e;
     }
