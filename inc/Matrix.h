@@ -30,7 +30,7 @@ public:
     Mat operator*(const Mat& right);
     Mat operator*(const float& right);
     Mat operator/(const Mat& right);
-
+    Mat operator/(const float& right);
 
     double calcDet() const;
     Mat inverse() const;

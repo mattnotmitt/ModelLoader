@@ -76,6 +76,15 @@ Mat Mat::operator/(const Mat &right) {
     return {*this * invRight};
 }
 
+Mat Mat::operator/(const float &right) {
+
+    VecA / right;
+    VecB / right;
+    VecC / right;
+
+    return {VecA, VecB, VecC};
+}
+
 double Mat::calcDet() const{
     double a, b, c, d;
     std::array<double, 9> det{0};
