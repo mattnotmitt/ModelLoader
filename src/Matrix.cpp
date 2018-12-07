@@ -62,12 +62,7 @@ Mat Mat::operator*(const Mat &right){
 }
 
 Mat Mat::operator*(const double &right) {
-
-    VecA * right;
-    VecB * right;
-    VecC * right;
-
-    return {VecA, VecB, VecC};
+    return {VecA * right, VecB * right, VecC * right};
 }
 
 Mat Mat::operator/(const Mat &right) {
@@ -78,12 +73,7 @@ Mat Mat::operator/(const Mat &right) {
 }
 
 Mat Mat::operator/(const double &right) {
-
-    VecA / right;
-    VecB / right;
-    VecC / right;
-
-    return {VecA, VecB, VecC};
+    return {VecA / right, VecB / right , VecC / right};
 }
 
 bool Mat::operator==(const Mat &rhs) const {
@@ -124,58 +114,6 @@ double Mat::calcDet() const{
     det[2] = a*d - b*c;
     det[2] = det[2]*this->VecC.getX();
 
-    /*//----------------------
-
-    a = this->VecB.getX();
-    b = this->VecC.getX();
-    c = this->VecB.getZ();
-    d = this->VecC.getZ();
-
-    det[3] = a*d - b*c;
-    det[3] = (-1)*det[3]*this->VecA.getY();
-
-    a = this->VecA.getX();
-    b = this->VecC.getX();
-    c = this->VecA.getZ();
-    d = this->VecC.getZ();
-
-    det[4] = a*d - b*c;
-    det[4] = det[4]*this->VecB.getY();
-
-    a = this->VecA.getX();
-    b = this->VecB.getX();
-    c = this->VecA.getZ();
-    d = this->VecB.getZ();
-
-    det[5] = a*d - b*c;
-    det[5] = (-1)*det[5]*this->VecC.getY();
-
-    //-----------------------
-
-    a = this->VecB.getX();
-    b = this->VecC.getX();
-    c = this->VecB.getY();
-    d = this->VecC.getY();
-
-    det[6] = a*d - b*c;
-    det[6] = det[6]*this->VecA.getZ();
-
-    a = this->VecA.getX();
-    b = this->VecC.getX();
-    c = this->VecA.getY();
-    d = this->VecC.getY();
-
-    det[7] = a*d - b*c;
-    det[7] = (-1)*det[7]*this->VecB.getZ();
-
-    a = this->VecA.getX();
-    b = this->VecB.getX();
-    c = this->VecA.getY();
-    d = this->VecB.getY();
-
-    det[8] = a*d - b*c;
-    det[8] = det[8]*this->VecC.getZ();*/
-
     return std::accumulate(det.begin(),det.end(), 0.0);
 
 }
@@ -197,17 +135,113 @@ Mat Mat::transpose() const{
 }
 
 Mat Mat::inverse() const{
-    double Det = calcDet();
+    double Det;
     Mat out = this->transpose();
+    Det = out.calcDet();
+    out = out.detMatrix();
+    out = out.cofactor();
     if (Det!= 0) {
-        out = out / Det;
+        out = out * (1 / Det);
     }
     else {
         throw;
     }
 
     return {out};
+}
 
+Mat Mat::detMatrix(){
+    Mat out;
+    double a, b, c, d;
+    std::array<double, 9> det{0};
+
+    a = this->VecB.getY();
+    b = this->VecC.getY();
+    c = this->VecB.getZ();
+    d = this->VecC.getZ();
+
+    det[0] = a*d - b*c;
+
+    a = this->VecA.getY();
+    b = this->VecC.getY();
+    c = this->VecA.getZ();
+    d = this->VecC.getZ();
+
+    det[1] = a*d - b*c;
+
+    a = this->VecA.getY();
+    b = this->VecB.getY();
+    c = this->VecA.getZ();
+    d = this->VecB.getZ();
+
+    det[2] = a*d - b*c;
+
+    //----------------------
+
+    a = this->VecB.getX();
+    b = this->VecC.getX();
+    c = this->VecB.getZ();
+    d = this->VecC.getZ();
+
+    det[3] = a*d - b*c;
+
+    a = this->VecA.getX();
+    b = this->VecC.getX();
+    c = this->VecA.getZ();
+    d = this->VecC.getZ();
+
+    det[4] = a*d - b*c;
+
+    a = this->VecA.getX();
+    b = this->VecB.getX();
+    c = this->VecA.getZ();
+    d = this->VecB.getZ();
+
+    det[5] = a*d - b*c;
+
+    //-----------------------
+
+    a = this->VecB.getX();
+    b = this->VecC.getX();
+    c = this->VecB.getY();
+    d = this->VecC.getY();
+
+    det[6] = a*d - b*c;
+
+    a = this->VecA.getX();
+    b = this->VecC.getX();
+    c = this->VecA.getY();
+    d = this->VecC.getY();
+
+    det[7] = a*d - b*c;
+
+    a = this->VecA.getX();
+    b = this->VecB.getX();
+    c = this->VecA.getY();
+    d = this->VecB.getY();
+
+    det[8] = a*d - b*c;
+
+    out.VecA.setX(det[0]);
+    out.VecB.setX(det[1]);
+    out.VecC.setX(det[2]);
+    out.VecA.setY(det[3]);
+    out.VecB.setY(det[4]);
+    out.VecC.setY(det[5]);
+    out.VecA.setZ(det[6]);
+    out.VecB.setZ(det[7]);
+    out.VecC.setZ(det[8]);
+
+    return out;
+}
+
+Mat Mat::cofactor(){
+    Mat out = *this;
+    out.VecA.setY(this->VecA.getY()* -1);
+    out.VecB.setX(this->VecB.getX()* -1);
+    out.VecB.setZ(this->VecB.getZ()* -1);
+    out.VecC.setY(this->VecC.getY()* -1);
+    return out;
 }
 
 std::ostream& operator<<(std::ostream& os, const Mat& Mat)

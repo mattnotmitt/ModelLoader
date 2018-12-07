@@ -79,8 +79,8 @@ TEST_CASE("Matrix inverse Multiplication and division", "[Mat]") {
                 Mat(Vec3(1.0, 0.0, 0.0), Vec3(0.0, 1.0, 0.0), Vec3(0.0, 0.0, 1.0))
                 == Mat(Vec3(1.0, 1.0, 1.0),Vec3(1.0, 1.0, 1.0),Vec3(1.0, 1.0, 1.0)));
         REQUIRE(Mat(Vec3(1.0, 2.0, 3.0), Vec3(1.0, 2.0, 3.0), Vec3(1.0, 2.0, 3.0)) /
-                Mat(Vec3(1.0, 1.0, 0.0), Vec3(1.0, 0.0, 1.0), Vec3(0.0, 1.0, 0.0))
-                == Mat(Vec3(0.0, 0.0, 0.0), Vec3(1.0, 2.0, 3.0), Vec3(1.0, 2.0, 3.0)));
+                Mat(Vec3(0.0, 3.0, 2.0), Vec3(-1.0, 2.0, 1.0), Vec3(-3.0, 3.0, 2.0))
+                == Mat( Vec3(1.0, 2.0, 3.0), Vec3(-1.0, -2.0, -3.0), Vec3(0.0, 0.0, 0.0)));
     }
     SECTION("Normal scalar operation") {
         REQUIRE(Mat(Vec3(1.0, 1.0, 1.0), Vec3(1.0, 1.0, 1.0), Vec3(1.0, 1.0, 1.0)) / 2.0
