@@ -5,6 +5,7 @@
 // Created by Seámus on 09/11/18.
 //
 
+Mat::Mat(Vec3 VecA, Vec3 VecB, Vec3 VecC): VecA(VecA), VecB(VecB), VecC(VecC) {}
 
 const Vec3 &Mat::getVecA() const {
     return VecA;
@@ -60,7 +61,7 @@ Mat Mat::operator*(const Mat &right){
     return {VecA, VecB, VecC};
 }
 
-Mat Mat::operator*(const float &right) {
+Mat Mat::operator*(const double &right) {
 
     VecA * right;
     VecB * right;
@@ -76,7 +77,7 @@ Mat Mat::operator/(const Mat &right) {
     return {*this * invRight};
 }
 
-Mat Mat::operator/(const float &right) {
+Mat Mat::operator/(const double &right) {
 
     VecA / right;
     VecB / right;
@@ -85,85 +86,95 @@ Mat Mat::operator/(const float &right) {
     return {VecA, VecB, VecC};
 }
 
+bool Mat::operator==(const Mat &rhs) const {
+    return VecA == rhs.VecA &&
+           VecB == rhs.VecB &&
+           VecC == rhs.VecC;
+}
+
+bool Mat::operator!=(const Mat &rhs) const {
+    return !(rhs == *this);
+}
+
 double Mat::calcDet() const{
     double a, b, c, d;
     std::array<double, 9> det{0};
 
-    a = VecB.getY();
-    b = VecC.getY();
-    c = VecB.getZ();
-    d = VecC.getZ();
+    a = this->VecB.getY();
+    b = this->VecC.getY();
+    c = this->VecB.getZ();
+    d = this->VecC.getZ();
 
     det[0] = a*d - b*c;
-    det[0]= det[0]*VecA.getX();
+    det[0]= det[0]*this->VecA.getX();
 
-    a = VecA.getY();
-    b = VecC.getY();
-    c = VecA.getZ();
-    d = VecC.getZ();
+    a = this->VecA.getY();
+    b = this->VecC.getY();
+    c = this->VecA.getZ();
+    d = this->VecC.getZ();
 
     det[1] = a*d - b*c;
-    det[1]= (-1)*det[1]*VecB.getX();
+    det[1]= (-1)*det[1]*this->VecB.getX();
 
-    a = VecA.getY();
-    b = VecB.getY();
-    c = VecA.getZ();
-    d = VecB.getZ();
+    a = this->VecA.getY();
+    b = this->VecB.getY();
+    c = this->VecA.getZ();
+    d = this->VecB.getZ();
 
     det[2] = a*d - b*c;
-    det[2] = det[2]*VecB.getX();
+    det[2] = det[2]*this->VecC.getX();
 
-    //----------------------
+    /*//----------------------
 
-    a = VecB.getX();
-    b = VecC.getX();
-    c = VecB.getZ();
-    d = VecC.getZ();
+    a = this->VecB.getX();
+    b = this->VecC.getX();
+    c = this->VecB.getZ();
+    d = this->VecC.getZ();
 
     det[3] = a*d - b*c;
-    det[3] = (-1)*det[3]*VecA.getY();
+    det[3] = (-1)*det[3]*this->VecA.getY();
 
-    a = VecA.getX();
-    b = VecC.getX();
-    c = VecA.getZ();
-    d = VecC.getZ();
+    a = this->VecA.getX();
+    b = this->VecC.getX();
+    c = this->VecA.getZ();
+    d = this->VecC.getZ();
 
     det[4] = a*d - b*c;
-    det[4] = det[4]*VecB.getY();
+    det[4] = det[4]*this->VecB.getY();
 
-    a = VecA.getX();
-    b = VecB.getX();
-    c = VecA.getZ();
-    d = VecB.getZ();
+    a = this->VecA.getX();
+    b = this->VecB.getX();
+    c = this->VecA.getZ();
+    d = this->VecB.getZ();
 
     det[5] = a*d - b*c;
-    det[5] = (-1)*det[5]*VecB.getY();
+    det[5] = (-1)*det[5]*this->VecC.getY();
 
     //-----------------------
 
-    a = VecB.getX();
-    b = VecC.getX();
-    c = VecB.getY();
-    d = VecC.getY();
+    a = this->VecB.getX();
+    b = this->VecC.getX();
+    c = this->VecB.getY();
+    d = this->VecC.getY();
 
     det[6] = a*d - b*c;
-    det[6] = det[6]*VecA.getZ();
+    det[6] = det[6]*this->VecA.getZ();
 
-    a = VecA.getX();
-    b = VecC.getX();
-    c = VecA.getY();
-    d = VecC.getY();
+    a = this->VecA.getX();
+    b = this->VecC.getX();
+    c = this->VecA.getY();
+    d = this->VecC.getY();
 
     det[7] = a*d - b*c;
-    det[7] = (-1)*det[7]*VecB.getZ();
+    det[7] = (-1)*det[7]*this->VecB.getZ();
 
-    a = VecA.getX();
-    b = VecB.getX();
-    c = VecA.getY();
-    d = VecB.getY();
+    a = this->VecA.getX();
+    b = this->VecB.getX();
+    c = this->VecA.getY();
+    d = this->VecB.getY();
 
     det[8] = a*d - b*c;
-    det[8] = det[8]*VecB.getZ();
+    det[8] = det[8]*this->VecC.getZ();*/
 
     return std::accumulate(det.begin(),det.end(), 0.0);
 
@@ -188,7 +199,27 @@ Mat Mat::transpose() const{
 Mat Mat::inverse() const{
     double Det = calcDet();
     Mat out = this->transpose();
-    out = out * Det;
+    if (Det!= 0) {
+        out = out / Det;
+    }
+    else {
+        throw;
+    }
+
     return {out};
 
 }
+
+std::ostream& operator<<(std::ostream& os, const Mat& Mat)
+{ /*
+    Vec3 X(Mat.VecA.getX(), Mat.VecB.getX(), Mat.VecC.getX());
+    Vec3 Y(Mat.VecA.getY(), Mat.VecB.getY(), Mat.VecC.getY());
+    Vec3 Z(Mat.VecA.getZ(), Mat.VecB.getZ(), Mat.VecC.getZ());
+
+    os << '/' << X.getX() << ',' << X.getY() << ',' << X.getZ() << '\\'<<std::endl;
+    os << '|' << Y.getX() << ',' << Y.getY() << ',' << Y.getZ() << '|'<<std::endl;
+    os << '\\' << Z.getX() << ',' << Z.getY() << ',' << Z.getZ() << '/'<<std::endl;*/
+    os << "[ " << Mat.VecA << ", " << Mat.VecB << ", " << Mat.VecC << " ]" << std::endl;
+    return os;
+}
+

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <iomanip>
 #include <iostream>
 
 class Vec3 {
@@ -18,6 +19,7 @@ public:
 
     bool operator==(const Vec3 &rhs) const;
     bool operator!=(const Vec3 &rhs) const;
+
     friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
 
     friend std::istream &operator>>(std::istream &is, Vec3 &vec);
@@ -36,10 +38,9 @@ public:
 
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);
-    Vec3 operator*(const float& right);
+    Vec3 operator*(const double& right);
     Vec3 operator*(const Vec3& right);
-    Vec3 operator/(const Vec3& right);
-    Vec3 operator/(const float& right);
+    Vec3 operator/(const double& right);
 
     double dot(const Vec3 &right);
 };
