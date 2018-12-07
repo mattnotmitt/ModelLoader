@@ -14,33 +14,28 @@ private:
     double z;
 public:
     Vec3() : x(0), y(0), z(0) {};
-
     Vec3(double x, double y, double z);
 
-    bool operator==(const Vec3 &rhs) const;
-    bool operator!=(const Vec3 &rhs) const;
-
-    friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
-
-    friend std::istream &operator>>(std::istream &is, Vec3 &vec);
-
     double getX() const;
-
-    double getY() const;
-
-    double getZ() const;
-
     void setX(double x);
 
+    double getY() const;
     void setY(double y);
 
+    double getZ() const;
     void setZ(double z);
+
 
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);
     Vec3 operator*(const double& right);
     Vec3 operator*(const Vec3& right);
     Vec3 operator/(const double& right);
+    bool operator==(const Vec3 &rhs) const;
+    bool operator!=(const Vec3 &rhs) const;
 
     double dot(const Vec3 &right);
+
+    friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
+    friend std::istream &operator>>(std::istream &is, Vec3 &vec);
 };

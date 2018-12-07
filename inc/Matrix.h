@@ -4,6 +4,7 @@
 #pragma once
 
 #include <numeric>
+#include <cmath>
 #include <array>
 #include "Vec3.h"
 
@@ -15,8 +16,6 @@ private:
 public:
     Mat() : VecA(), VecB(), VecC() {};
     Mat(Vec3 VecA, Vec3 VecB, Vec3 VecC);
-
-    friend std::ostream& operator<<(std::ostream& os, const Mat& Mat);
 
     const Vec3 &getVecA() const;
     void setVecA(const Vec3 &VecA);
@@ -41,8 +40,12 @@ public:
     Mat transpose() const;
     Mat cofactor();
     Mat detMatrix();
+    std::array<Mat, 3> genRotation(double x, double y, double z);
+    void populate(double a, double b, double c,
+                 double d, double e, double f,
+                 double g, double h, double i);
 
-
+    friend std::ostream& operator<<(std::ostream& os, const Mat& Mat);
 
 
 
