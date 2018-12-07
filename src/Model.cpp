@@ -87,7 +87,7 @@ void Model::loadFile(std::string &filePath) {
                     }
 
                     cell->setCellVertices(cellVertices);
-                    //std::cout << "Cell " << index << ": " << *cell << std::endl;
+                    std::cout << "Cell " << index << ": " << *cell << std::endl;
                     Cells.emplace(index, std::move(cell));
                     break;
                 }
