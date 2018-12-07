@@ -6,15 +6,17 @@
 
 double Tetrahedron::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
-    float volume;
-    // TODO: Write function which will return volume of tetrahedron from array of vertices
+    double volume;
+    Vec3 magnitude;
+    magnitude = (*vertices[0] * *vertices[1]);
+    volume = magnitude.dot(*vertices[2])/6;
     return volume;
 }
 
 Vec3 Tetrahedron::calcCentreofGravity() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     Vec3 cog;
-    // TODO: Write function which will return centre of gravity of tetrahedron from array of vertices
+    cog = (*vertices[0]+*vertices[1]+*vertices[2]+*vertices[3])/5.0;
     return cog;
 }
 
