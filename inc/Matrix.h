@@ -16,6 +16,8 @@ public:
     Mat() : VecA(), VecB(), VecC() {};
     Mat(Vec3 VecA, Vec3 VecB, Vec3 VecC);
 
+    friend std::ostream& operator<<(std::ostream& os, const Mat& Mat);
+
     const Vec3 &getVecA() const;
     void setVecA(const Vec3 &VecA);
 
@@ -28,13 +30,16 @@ public:
     Mat operator+ (const Mat& right);
     Mat operator-(const Mat& right);
     Mat operator*(const Mat& right);
-    Mat operator*(const float& right);
+    Mat operator*(const double& right);
     Mat operator/(const Mat& right);
-    Mat operator/(const float& right);
+    Mat operator/(const double& right);
+    bool operator==(const Mat &rhs) const;
+    bool operator!=(const Mat &rhs) const;
 
     double calcDet() const;
     Mat inverse() const;
     Mat transpose() const;
+
 
 
 
