@@ -13,7 +13,7 @@ public:
         this->CellType = Cell::Type::HEXAHEDRON;
     };
 
-    Hexahedron(std::shared_ptr<Material> CellMaterial) : Cell(CellMaterial) {
+    Hexahedron(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
         this->CellType = Cell::Type::HEXAHEDRON;
     };
 

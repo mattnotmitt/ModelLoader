@@ -27,16 +27,14 @@ public:
     friend std::istream &operator>>(std::istream &is, Vec3 &vec);
 
     double getX() const;
-
     double getY() const;
-
     double getZ() const;
+    int getIndex() const;
 
     void setX(double x);
-
     void setY(double y);
-
     void setZ(double z);
+    void setIndex(int index);
 
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);

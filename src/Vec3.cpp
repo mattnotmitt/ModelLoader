@@ -89,3 +89,11 @@ std::istream &operator>>(std::istream &is, Vec3 &vec) {
 
     return is;
 }
+
+int Vec3::getIndex() const {
+    return index;
+}
+
+void Vec3::setIndex(int index) {
+    Vec3::index = index;
+}

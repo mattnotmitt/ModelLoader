@@ -34,7 +34,7 @@ void Material::setColour(const std::string &Colour) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Material &mat) {
-    os << mat.getName() << " has density " << mat.getDensity() << " and colour #" << mat.getColour() << '.';
+    os << mat.getName() << " (" << mat.getIndex() << ") has density " << mat.getDensity() << " and colour #" << mat.getColour() << '.';
     return os;
 }
 
@@ -53,5 +53,13 @@ std::istream &operator>>(std::istream &is, Material &mat) {
     mat.setColour(colour);
     mat.setName(name);
     return is;
+}
+
+int Material::getIndex() const {
+    return index;
+}
+
+void Material::setIndex(int index) {
+    Material::index = index;
 }
 

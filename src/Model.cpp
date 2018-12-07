@@ -31,15 +31,17 @@ void Model::loadFile(std::string &filePath) {
                 case 'm': { // Parse material declaration line
                     if (Materials.count(index) != 0) throw "Material " + std::to_string(index) + " already declared.";
                     Material mat;
+                    mat.setIndex(index);
                     iss >> mat;
 
-                    //std::cout << "Material " << index << ": " << mat << std::endl;
+                    std::cout << mat << std::endl;
                     Materials.emplace(index, mat);
                     break;
                 }
                 case 'v': { // Parse vertex declaration line
                     if (Vertices.count(index) != 0) throw "Vertex " + std::to_string(index) + " already declared.";
                     Vec3 vec;
+                    vec.setIndex(index);
                     iss >> vec;
                     //std::cout << "Vertex " << index << ": " << vec << std::endl;
                     Vertices.emplace(index, vec);
@@ -56,17 +58,17 @@ void Model::loadFile(std::string &filePath) {
 
                     switch (cellType) {
                         case 'h': {
-                            cell = std::make_shared<Hexahedron>(std::make_shared<Material>(Materials.at(materialIndex)));
+                            cell = std::make_shared<Hexahedron>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 8;
                             break;
                         }
                         case 'p': {
-                            cell = std::make_shared<Pyramid>(std::make_shared<Material>(Materials.at(materialIndex)));
+                            cell = std::make_shared<Pyramid>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 5;
                             break;
                         }
                         case 't': {
-                            cell = std::make_shared<Tetrahedron>(std::make_shared<Material>(Materials.at(materialIndex)));
+                            cell = std::make_shared<Tetrahedron>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 4;
                             break;
                         }
@@ -87,7 +89,7 @@ void Model::loadFile(std::string &filePath) {
                     }
 
                     cell->setCellVertices(cellVertices);
-                    std::cout << "Cell " << index << ": " << *cell << std::endl;
+                    std::cout << *cell << std::endl;
                     Cells.emplace(index, std::move(cell));
                     break;
                 }

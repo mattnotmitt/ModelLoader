@@ -42,7 +42,7 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
         {Cell::Type::PYRAMID, "Pyramid"},
         {Cell::Type::HEXAHEDRON, "Hexahedron"}
     };
-    os << "Cell is a " << CellString[cell.CellType]
+    os << "Cell " << cell.getIndex() << " is a " << CellString[cell.CellType]
         << ", made of material " << cell.getCellMaterial()->getName()
         << " and has " << cell.getCellVertices().size() 
         << " vertices. Its volume is " << cell.getVolume() << ", weight is " << cell.getWeight()
@@ -58,4 +58,12 @@ std::ofstream &operator<<(std::ofstream &os, const Cell &cell) {
     };
     //TODO: output like cell lines in input file
     return os;
+}
+
+int Cell::getIndex() const {
+    return index;
+}
+
+void Cell::setIndex(int index) {
+    Cell::index = index;
 };

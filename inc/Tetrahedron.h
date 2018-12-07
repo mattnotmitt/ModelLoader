@@ -12,7 +12,7 @@ public:
         this->CellType = Cell::Type::TETRAHEDRON;
     };
 
-    Tetrahedron(std::shared_ptr<Material> CellMaterial) : Cell(CellMaterial) {
+    Tetrahedron(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
         this->CellType = Cell::Type::TETRAHEDRON;
     };
 

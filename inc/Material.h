@@ -11,6 +11,7 @@
 class Material {
 private:
     int Density;
+    int index = -1;
     std::string Name;
     std::string Colour;
 public:
@@ -24,11 +25,15 @@ public:
 
     const std::string &getName() const;
 
+    int getIndex() const;
+
     const std::string &getColour() const;
 
     void setDensity(int Density);
 
     void setName(const std::string &Name);
+
+    void setIndex(int index);
 
     void setColour(const std::string &Colour);
 

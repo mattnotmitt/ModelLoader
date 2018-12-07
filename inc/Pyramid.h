@@ -12,7 +12,7 @@ public:
         this->CellType = Cell::Type::PYRAMID;
     };
 
-    explicit Pyramid(std::shared_ptr<Material> CellMaterial) : Cell(CellMaterial) {
+    explicit Pyramid(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
         this->CellType = Cell::Type::PYRAMID;
     };
 

@@ -17,6 +17,7 @@ private:
     float Volume = 0;
     Vec3 CentreOfGravity;
     float Weight = 0;
+    int index = -1;
 
 public:
     enum class Type {
@@ -29,7 +30,7 @@ public:
 
     Cell() = default;
 
-    explicit Cell(std::shared_ptr<Material> material) : CellMaterial(material) {};
+    explicit Cell(std::shared_ptr<Material> material, int index) : CellMaterial(material), index(index) {};
     explicit Cell(std::vector<std::shared_ptr<Vec3>> CellVertices, std::shared_ptr<Material> material);
     virtual ~Cell() = default;
 
@@ -61,6 +62,11 @@ public:
      * @return weight of Cell instance
      */
     float getWeight() const;
+    /**
+     * Get index of cell instance
+     * @return
+     */
+    int getIndex() const;
 
     /**
      * Sets vertex coordinates of cell instance
@@ -72,6 +78,12 @@ public:
      * @param CellMaterial
      */
     void setCellMaterial(const std::shared_ptr<Material> &CellMaterial);
+    /**
+     * Sets index of cell instance
+     * @param index
+     */
+    void setIndex(int index);
+
 
     /**
      * Calculate volume of cell instance
@@ -83,6 +95,7 @@ public:
      * @return centre of gravity
      */
     virtual Vec3 calcCentreofGravity() const = 0;
+
     /**
      * Calculate weight of cell instance
      * @return weight
