@@ -6,6 +6,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 
 class Vec3 {
 private:

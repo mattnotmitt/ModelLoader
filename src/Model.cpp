@@ -129,5 +129,19 @@ void Model::setVertices(const std::map<int, Vec3> &Vertices) {
 
 std::ofstream &operator<<(std::ofstream &os, const Model &model) {
     //TODO: when this is called output the file as it looks in the input
+    std::map<int, Material> materials = model.getMaterials();
+    std::map<int, Vec3> vertices = model.getVertices();
+    std::map<int, std::shared_ptr<Cell>> cells = model.getCells();
+
+    for (const auto& material: materials){
+        os << material.second << std::endl;
+    }
+    for (const auto& vertex: vertices){
+        os << vertex.second << std::endl;
+    }
+    for (const auto& cell: cells){
+        os << *cell.second << std::endl;
+    }
+
     return os;
 }

@@ -40,6 +40,7 @@ std::ostream &operator<<(std::ostream &os, const Material &mat) {
 
 std::ofstream &operator<<(std::ofstream &os, const Material &mat) {
     //TODO: Output to file
+    os  << "m " << mat.getIndex() << " " << mat.getDensity() << " " << mat.getColour() << " " << mat.getName();
     return os;
 }
 

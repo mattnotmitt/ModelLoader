@@ -54,13 +54,25 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     return os;
 };
 
+int retrieveIndex (std::shared_ptr<Vec3> vertex) {
+    return vertex->getIndex();
+}
+
 std::ofstream &operator<<(std::ofstream &os, const Cell &cell) {
     std::map<Cell::Type, std::string> CellString {
             {Cell::Type::TETRAHEDRON, "t"},
             {Cell::Type::PYRAMID, "p"},
             {Cell::Type::HEXAHEDRON, "h"}
     };
-    //TODO: output like cell lines in input file
+    os  << "c " << cell.getIndex() << " " << CellString[cell.CellType] << " " << cell.getCellMaterial()->getIndex();
+
+    const std::vector<std::shared_ptr<Vec3>> vertices = cell.getCellVertices();
+    std::vector<int> VertexIndexes;
+    VertexIndexes.resize(vertices.size());
+    std::transform(vertices.begin(), vertices.end(), VertexIndexes.begin(), retrieveIndex);
+    for (auto &index: VertexIndexes){
+        os << " " << index;
+    }
     return os;
 }
 

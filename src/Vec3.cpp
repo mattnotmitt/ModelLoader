@@ -150,6 +150,7 @@ std::ostream& operator<<(std::ostream& os, const Vec3& vec)
 
 std::ofstream& operator<<(std::ofstream& os, const Vec3& vec) {
     //TODO: Output vector to look like input file
+    os << "v " << vec.getIndex()  << " " << vec.getX() << " " << vec.getY() << " " << vec.getZ();
     return os;
 };
 
