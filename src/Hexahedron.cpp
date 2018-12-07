@@ -1,8 +1,19 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "performance-unnecessary-value-param"
 //
 // Created by matt on 08/11/18.
 //
 
 #include "Hexahedron.h"
+
+Hexahedron::Hexahedron(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
+    this->CellType = Cell::Type::HEXAHEDRON;
+}
+
+Hexahedron::Hexahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
+        : Cell::Cell(CellVertices, CellMaterial) {
+    this->CellType = Cell::Type::HEXAHEDRON;
+}
 
 double Hexahedron::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
@@ -33,8 +44,10 @@ Vec3 Hexahedron::calcCentreofGravity() const {
 
 double Hexahedron::calcWeight() const {
     const Material material = *getCellMaterial();
-    const float volume = getVolume();
-    float weight = 0;
+    const double volume = getVolume();
+    double weight = 0;
     weight = material.getDensity() * volume;
     return weight;
 }
+
+#pragma clang diagnostic pop

@@ -1,12 +1,16 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-pass-by-value"
+#pragma ide diagnostic ignored "performance-unnecessary-value-param"
 //
 // Created by matt on 08/11/18.
 //
 
 #include "Cell.h"
 
+Cell::Cell(std::shared_ptr<Material> material, int index) : CellMaterial(material), index(index) {};
+
 Cell::Cell(std::vector<std::shared_ptr<Vec3>> CellVertices, std::shared_ptr<Material> CellMaterial)
-    : CellVertices(CellVertices), CellMaterial(CellMaterial), CellType(Cell::Type::NONE) {
-};
+    : CellVertices(CellVertices), CellMaterial(CellMaterial), CellType(Cell::Type::NONE) {};
 
 const std::vector<std::shared_ptr<Vec3>> & Cell::getCellVertices() const {
     return CellVertices;
@@ -24,7 +28,7 @@ void Cell::setCellMaterial(const std::shared_ptr<Material> &material) {
     Cell::CellMaterial = material;
 }
 
-float Cell::getVolume() const {
+double Cell::getVolume() const {
     return this->calcVolume();
 }
 
@@ -32,7 +36,7 @@ const Vec3 Cell::getCentreOfGravity() const {
     return this->calcCentreofGravity();
 }
 
-float Cell::getWeight() const {
+double Cell::getWeight() const {
     return this->calcWeight();
 }
 
@@ -66,4 +70,6 @@ int Cell::getIndex() const {
 
 void Cell::setIndex(int index) {
     Cell::index = index;
-};
+}
+
+#pragma clang diagnostic pop

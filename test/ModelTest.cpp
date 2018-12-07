@@ -11,7 +11,7 @@ SCENARIO("Can correctly load a model file", "[Model]") {
         WHEN("The file is parsed") {
             Model ExampleModel1(filePath);
             REQUIRE(ExampleModel1.getMaterials().size() == 2);
-            REQUIRE(ExampleModel1.getCells().at(0)->getCellMaterial().getName() == "copper");
+            REQUIRE(ExampleModel1.getCells().at(0)->getCellMaterial()->getName() == "copper");
         }
     }
     GIVEN("A file path of a large model file") {
@@ -20,7 +20,7 @@ SCENARIO("Can correctly load a model file", "[Model]") {
             Model ExampleModel2(filePath);
             // INFO(ExampleModel2.getCells().size())
             REQUIRE(ExampleModel2.getMaterials().size() == 2);
-            REQUIRE(ExampleModel2.getCells().at(0)->getCellMaterial().getName() == "cu");
+            REQUIRE(ExampleModel2.getCells().at(0)->getCellMaterial()->getName() == "cu");
         }
     }
 }

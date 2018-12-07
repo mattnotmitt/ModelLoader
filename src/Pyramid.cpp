@@ -4,6 +4,19 @@
 
 #include "Pyramid.h"
 
+Pyramid::Pyramid() {
+    this->CellType = Cell::Type::PYRAMID;
+}
+
+Pyramid::Pyramid(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
+    this->CellType = Cell::Type::PYRAMID;
+}
+
+Pyramid::Pyramid(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
+        : Cell(CellVertices, CellMaterial) {
+    this->CellType = Cell::Type::PYRAMID;
+}
+
 double Pyramid::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     double volume;
@@ -24,8 +37,8 @@ Vec3 Pyramid::calcCentreofGravity() const {
 
 double Pyramid::calcWeight() const {
     const Material material = *getCellMaterial();
-    const float volume = getVolume();
-    float weight = 0;
+    const double volume = getVolume();
+    double weight = 0;
     weight = material.getDensity() * volume;
     return weight;
 }

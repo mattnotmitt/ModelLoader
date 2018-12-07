@@ -4,6 +4,19 @@
 
 #include "Tetrahedron.h"
 
+Tetrahedron::Tetrahedron() {
+    this->CellType = Cell::Type::TETRAHEDRON;
+}
+
+Tetrahedron::Tetrahedron(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
+    this->CellType = Cell::Type::TETRAHEDRON;
+}
+
+Tetrahedron::Tetrahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
+        : Cell(CellVertices, CellMaterial) {
+    this->CellType = Cell::Type::TETRAHEDRON;
+}
+
 double Tetrahedron::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     float volume;

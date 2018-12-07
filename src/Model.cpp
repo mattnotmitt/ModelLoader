@@ -2,8 +2,6 @@
 // Created by matt on 08/11/18.
 //
 
-#include <Model.h>
-
 #include "Model.h"
 
 Model::Model(std::string &filePath) {

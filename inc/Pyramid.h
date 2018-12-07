@@ -8,18 +8,11 @@
 
 class Pyramid : public Cell {
 public:
-    Pyramid() {
-        this->CellType = Cell::Type::PYRAMID;
-    };
+    Pyramid();
 
-    explicit Pyramid(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
-        this->CellType = Cell::Type::PYRAMID;
-    };
+    explicit Pyramid(std::shared_ptr<Material> CellMaterial, int CellIndex);
 
-    Pyramid(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
-            : Cell(CellVertices, CellMaterial) {
-        this->CellType = Cell::Type::PYRAMID;
-    };
+    Pyramid(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial);
     ~Pyramid() override = default;
 
     // const keyword disallows modification of class by function

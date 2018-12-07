@@ -24,9 +24,6 @@ private:
     std::map<int, Material> Materials;
     std::map<int, Vec3> Vertices;
 public:
-    const std::map<int, Vec3> &getVertices() const;
-
-    void setVertices(const std::map<int, Vec3> &Vertices);
     // Constructor & Destructor
     Model() = default;
     Model(std::string &filePath);
@@ -37,10 +34,12 @@ public:
     // Getters
     void setCells(std::map<int, std::shared_ptr<Cell>> &Cells);
     void setMaterials(const std::map<int, Material> &Materials);
+    void setVertices(const std::map<int, Vec3> &Vertices);
 
     // Setters
     const std::map<int, std::shared_ptr<Cell>> &getCells() const;
     const std::map<int, Material> &getMaterials() const;
+    const std::map<int, Vec3> &getVertices() const;
 
     // Main functions
     void loadFile(std::string &filePath);

@@ -13,14 +13,9 @@ public:
         this->CellType = Cell::Type::HEXAHEDRON;
     };
 
-    Hexahedron(std::shared_ptr<Material> CellMaterial, int CellIndex) : Cell(CellMaterial, CellIndex) {
-        this->CellType = Cell::Type::HEXAHEDRON;
-    };
+    Hexahedron(std::shared_ptr<Material> CellMaterial, int CellIndex);
 
-    Hexahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
-            : Cell::Cell(CellVertices, CellMaterial) {
-        this->CellType = Cell::Type::HEXAHEDRON;
-    }
+    Hexahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial);
     ~Hexahedron() override = default;
 
     // const keyword disallows modification of class by function

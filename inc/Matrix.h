@@ -40,7 +40,7 @@ public:
     Mat transpose() const;
     Mat cofactor();
     Mat detMatrix();
-    std::array<Mat, 3> genRotation(double x, double y, double z);
+    friend std::array<Mat, 3> genRotation(double xRads, double yRads, double zRads);
     void populate(double a, double b, double c,
                  double d, double e, double f,
                  double g, double h, double i);

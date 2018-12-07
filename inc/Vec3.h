@@ -18,9 +18,6 @@ public:
     Vec3(double x, double y, double z);
     Vec3(double x, double y, double z, int index);
 
-    bool operator==(const Vec3 &rhs) const;
-    bool operator!=(const Vec3 &rhs) const;
-
     friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
     friend std::ofstream& operator<<(std::ofstream& ofs, const Vec3& vec);
 

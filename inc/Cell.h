@@ -30,11 +30,23 @@ public:
 
     Cell() = default;
 
-    explicit Cell(std::shared_ptr<Material> material, int index) : CellMaterial(material), index(index) {};
+    explicit Cell(std::shared_ptr<Material> material, int index);
     explicit Cell(std::vector<std::shared_ptr<Vec3>> CellVertices, std::shared_ptr<Material> material);
     virtual ~Cell() = default;
 
+    /**
+     * Overload generic output stream operator
+     * @param os
+     * @param cell
+     * @return output stream
+     */
     friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+    /**
+     * Overload output filestream operator
+     * @param os
+     * @param cell
+     * @return output fstream
+     */
     friend std::ofstream &operator<<(std::ofstream &os, const Cell &cell);
 
     /**
@@ -51,7 +63,7 @@ public:
      * Get volume of Cell instance
      * @return volume of Cell
      */
-    float getVolume() const;
+    double getVolume() const;
     /**
      * Get centre of gravity of Cell instance
      * @return Vec3 containing estimated centre of gravity location
@@ -61,7 +73,7 @@ public:
      * Get weight of Cell instance
      * @return weight of Cell instance
      */
-    float getWeight() const;
+    double getWeight() const;
     /**
      * Get index of cell instance
      * @return
