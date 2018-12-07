@@ -36,11 +36,17 @@ public:
     void setZ(double z);
     void setIndex(int index);
 
+
     Vec3 operator+(const Vec3& right);
     Vec3 operator-(const Vec3& right);
     Vec3 operator*(const double& right);
     Vec3 operator*(const Vec3& right);
     Vec3 operator/(const double& right);
+    bool operator==(const Vec3 &rhs) const;
+    bool operator!=(const Vec3 &rhs) const;
 
     double dot(const Vec3 &right);
+
+    friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
+    friend std::istream &operator>>(std::istream &is, Vec3 &vec);
 };
