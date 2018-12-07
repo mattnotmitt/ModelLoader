@@ -2,7 +2,6 @@
 // Created by matt on 08/11/18.
 //
 
-#include <d3dvec.inl>
 #include "Pyramid.h"
 
 float Pyramid::calcVolume() const {
@@ -12,7 +11,7 @@ float Pyramid::calcVolume() const {
     Vec3 A = vertices[0] - vertices[1]; //VectA
     Vec3 B = vertices[0] - vertices[3]; //VectB
     Vec3 C = vertices[0] - vertices[4]; //VectC
-    volume = (A*B).dot(C) * (1/3);
+    volume = std::abs((A*B).dot(C)) * (1.0/3.0);
     return volume;
 }
 
@@ -26,12 +25,9 @@ Vec3 Pyramid::calcCentreofGravity() const {
 }
 
 float Pyramid::calcWeight() const {
-    const Material material = Cell::getCellMaterial();
-    const float volume = Cell::getVolume();
+    const Material material = this->getCellMaterial();
+    const float volume = this->getVolume();
     float weight = 0;
-    // TODO: Write function which will return weight of pyramid from volume and material
-    material.getDensity();
-    this->getVolume();
-    weight = Density*volume;
+    weight = material.getDensity()*volume;
     return weight;
 }

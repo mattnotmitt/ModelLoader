@@ -37,6 +37,7 @@ float Cell::getWeight() const {
 
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     os << "Made of material " << cell.getCellMaterial().getName() << " and has " << cell.getCellVertices().size()
-       << " vertices.";
+       << " vertices. Its volume is " << cell.getVolume() << ", weight is " << cell.getWeight()
+       << " and centre of gravity is at " << cell.getCentreOfGravity();
     return os;
 };

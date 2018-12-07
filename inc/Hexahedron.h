@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cmath>
 #include "Cell.h"
 
 class Hexahedron : public Cell {
