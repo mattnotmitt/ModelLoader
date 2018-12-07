@@ -4,7 +4,9 @@
 
 #pragma once
 
+#include <algorithm>
 #include <memory>
+#include <fstream>
 #include <vector>
 
 #include "Vec3.h"
