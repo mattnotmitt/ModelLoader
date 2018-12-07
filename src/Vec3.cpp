@@ -79,15 +79,6 @@ Vec3 Vec3::operator-(const Vec3 &right) {
 }
 
 /**
- * Dot (Scalar) product of two Vec3s
- * @param right
- * @return Scalar product
- */
-double Vec3::dot(const Vec3 &right) {
-    return x*right.x + y*right.y + z*right.z;
-}
-
-/**
  * Cross product of two Vec3s
  * @param right
  * @return Cross product
@@ -134,6 +125,23 @@ bool Vec3::operator==(const Vec3 &rhs) const {
  */
 bool Vec3::operator!=(const Vec3 &rhs) const {
     return !(rhs == *this);
+}
+
+/**
+ * Dot (Scalar) product of two Vec3s
+ * @param right
+ * @return Scalar product
+ */
+double Vec3::dot(const Vec3 &right) {
+    return x*right.x + y*right.y + z*right.z;
+}
+
+/**
+ * calculates the magnitude of a vector
+ * @return magnitude
+ */
+double Vec3::mag(){
+    return sqrt(x*x + y*y + z*z);
 }
 
 /**

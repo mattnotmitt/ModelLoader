@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <numeric>
+#include <algorithm>
 #include "Cell.h"
 
 class Tetrahedron : public Cell {

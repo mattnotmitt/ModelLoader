@@ -6,6 +6,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <cmath>
 #include <fstream>
 
 class Vec3 {
@@ -44,6 +45,7 @@ public:
     bool operator!=(const Vec3 &rhs) const;
 
     double dot(const Vec3 &right);
+    double mag();
 
     friend std::ostream& operator<<(std::ostream& os, const Vec3& vec);
     friend std::istream &operator>>(std::istream &is, Vec3 &vec);
