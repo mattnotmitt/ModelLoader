@@ -33,6 +33,7 @@ public:
     void setColour(const std::string &Colour);
 
     friend std::ostream &operator<<(std::ostream &os, const Material &mat);
+    friend std::ofstream &operator<<(std::ofstream &os, const Material &mat);
 
     friend std::istream &operator>>(std::istream &is, Material &mat);
 };

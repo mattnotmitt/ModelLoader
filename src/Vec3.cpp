@@ -5,6 +5,7 @@
 #include "Vec3.h"
 
 Vec3::Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
+Vec3::Vec3(double x, double y, double z, int index) : x(x), y(y), z(z), index(index) {}
 
 Vec3 Vec3::operator+(const Vec3 &right) {
     return {x + right.x, y + right.y, z + right.z};
@@ -72,6 +73,11 @@ std::ostream& operator<<(std::ostream& os, const Vec3& vec)
     os << std::fixed << std::setprecision(3) <<'[' << vec.getX() << ',' << vec.getY() << ',' << vec.getZ() << ']';
     return os;
 }
+
+std::ofstream& operator<<(std::ofstream& os, const Vec3& vec) {
+    //TODO: Output vector to look like input file
+    return os;
+};
 
 std::istream &operator>>(std::istream &is, Vec3 &vec) {
     double x, y, z;

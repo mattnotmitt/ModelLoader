@@ -20,7 +20,7 @@
 
 class Model {
 private:
-    std::map<int, std::unique_ptr<Cell>> Cells;
+    std::map<int, std::shared_ptr<Cell>> Cells;
     std::map<int, Material> Materials;
     std::map<int, Vec3> Vertices;
 public:
@@ -35,13 +35,15 @@ public:
     ~Model() = default;
 
     // Getters
-    void setCells(std::map<int, std::unique_ptr<Cell>> &Cells);
+    void setCells(std::map<int, std::shared_ptr<Cell>> &Cells);
     void setMaterials(const std::map<int, Material> &Materials);
 
     // Setters
-    const std::map<int, std::unique_ptr<Cell>> &getCells() const;
+    const std::map<int, std::shared_ptr<Cell>> &getCells() const;
     const std::map<int, Material> &getMaterials() const;
 
     // Main functions
     void loadFile(std::string &filePath);
+
+    friend std::ofstream &operator<<(std::ofstream &os, const Model &model);
 };

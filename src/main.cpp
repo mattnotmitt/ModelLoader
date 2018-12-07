@@ -6,7 +6,7 @@
 #include "Model.h"
 
 int main (int argc, char** argv) {
-    std::string filePath = "../test/ExampleModel1.mod";
+    std::string filePath = "../test/ExampleModel4.mod";
     try {
         Model ExampleModel1(filePath);
         std::cout << "File loaded successfully. " 

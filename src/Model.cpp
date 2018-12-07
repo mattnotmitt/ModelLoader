@@ -47,26 +47,26 @@ void Model::loadFile(std::string &filePath) {
                 }
                 case 'c': { // Parse cell declaration line
                     if (Cells.count(index) != 0) throw "Cell " + std::to_string(index) + " already declared.";
-                    std::unique_ptr<Cell> cell;
+                    std::shared_ptr<Cell> cell;
                     char cellType;
                     int materialIndex, vertexIndex, vertexCount;
-                    std::vector<Vec3> cellVertices;
+                    std::vector<std::shared_ptr<Vec3>> cellVertices;
 
                     iss >> cellType >> materialIndex;
 
                     switch (cellType) {
                         case 'h': {
-                            cell = std::make_unique<Hexahedron>(Materials.at(materialIndex));
+                            cell = std::make_shared<Hexahedron>(std::make_shared<Material>(Materials.at(materialIndex)));
                             vertexCount = 8;
                             break;
                         }
                         case 'p': {
-                            cell = std::make_unique<Pyramid>(Materials.at(materialIndex));
+                            cell = std::make_shared<Pyramid>(std::make_shared<Material>(Materials.at(materialIndex)));
                             vertexCount = 5;
                             break;
                         }
                         case 't': {
-                            cell = std::make_unique<Tetrahedron>(Materials.at(materialIndex));
+                            cell = std::make_shared<Tetrahedron>(std::make_shared<Material>(Materials.at(materialIndex)));
                             vertexCount = 4;
                             break;
                         }
@@ -78,7 +78,7 @@ void Model::loadFile(std::string &filePath) {
                         if (Vertices.count(vertexIndex) == 0) {
                             throw "Vertex " + std::to_string(vertexIndex) + " not found.";
                         } else {
-                            cellVertices.push_back(Vertices.at(vertexIndex));
+                            cellVertices.push_back(std::make_shared<Vec3>(Vertices.at(vertexIndex)));
                         }
                     }
 
@@ -107,7 +107,7 @@ const std::map<int, Material> &Model::getMaterials() const {
     return Materials;
 }
 
-const std::map<int, std::unique_ptr<Cell>> &Model::getCells() const {
+const std::map<int, std::shared_ptr<Cell>> &Model::getCells() const {
     return Cells;
 }
 
@@ -119,10 +119,15 @@ void Model::setMaterials(const std::map<int, Material> &Materials) {
     Model::Materials = Materials;
 }
 
-void Model::setCells(std::map<int, std::unique_ptr<Cell>> &Cells) {
+void Model::setCells(std::map<int, std::shared_ptr<Cell>> &Cells) {
     Model::Cells = std::move(Cells);
 }
 
 void Model::setVertices(const std::map<int, Vec3> &Vertices) {
     Model::Vertices = Vertices;
+}
+
+std::ofstream &operator<<(std::ofstream &os, const Model &model) {
+    //TODO: when this is called output the file as it looks in the input
+    return os;
 }

@@ -39,9 +39,4 @@ public:
     double calcDet() const;
     Mat inverse() const;
     Mat transpose() const;
-
-
-
-
-
 };

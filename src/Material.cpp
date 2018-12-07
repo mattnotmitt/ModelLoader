@@ -38,6 +38,11 @@ std::ostream &operator<<(std::ostream &os, const Material &mat) {
     return os;
 }
 
+std::ofstream &operator<<(std::ofstream &os, const Material &mat) {
+    //TODO: Output to file
+    return os;
+}
+
 std::istream &operator>>(std::istream &is, Material &mat) {
     int density;
     std::string name, colour;

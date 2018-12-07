@@ -9,17 +9,23 @@
 
 class Hexahedron : public Cell {
 public:
-    Hexahedron() = default;
+    Hexahedron() {
+        this->CellType = Cell::Type::HEXAHEDRON;
+    };
 
-    Hexahedron(const Material &CellMaterial) : Cell(CellMaterial) {};
+    Hexahedron(std::shared_ptr<Material> CellMaterial) : Cell(CellMaterial) {
+        this->CellType = Cell::Type::HEXAHEDRON;
+    };
 
-    Hexahedron(const std::vector<Vec3> &CellVertices, const Material &CellMaterial)
-            : Cell::Cell(CellVertices, CellMaterial) {}
+    Hexahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::shared_ptr<Material> CellMaterial)
+            : Cell::Cell(CellVertices, CellMaterial) {
+        this->CellType = Cell::Type::HEXAHEDRON;
+    }
     ~Hexahedron() override = default;
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)
-    float calcVolume() const override;
+    double calcVolume() const override;
     Vec3 calcCentreofGravity() const override;
-    float calcWeight() const override;
+    double calcWeight() const override;
 };
