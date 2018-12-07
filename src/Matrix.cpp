@@ -5,84 +5,43 @@
 // Created by Seámus on 09/11/18.
 //
 
-/**
- * Mat constructor
- * @param VecA
- * @param VecB
- * @param VecC
- */
+
 Mat::Mat(Vec3 VecA, Vec3 VecB, Vec3 VecC): VecA(VecA), VecB(VecB), VecC(VecC) {}
 
-/**
- * VecA getter
- * @return VecA
- */
+
 const Vec3 &Mat::getVecA() const {
     return VecA;
 }
 
-/**
- * VecA setter
- * @param VecA
- */
 void Mat::setVecA(const Vec3 &VecA) {
     Mat::VecA = VecA;
 }
 
-/**
- * VecB getter
- * @return VecB
- */
 const Vec3 &Mat::getVecB() const {
     return VecB;
 }
-/**
- * VecB setter
- * @param VecB
- */
+
 void Mat::setVecB(const Vec3 &VecB) {
     Mat::VecB = VecB;
 }
 
-/**
- * VecC getter
- * @return VecC
- */
 const Vec3 &Mat::getVecC() const {
     return VecC;
 }
 
-/**
- * vec C setter
- * @param VecC
- */
 void Mat::setVecC(const Vec3 &VecC) {
     Mat::VecC = VecC;
 }
 
-/**
- * addition of two matrices
- * @param right
- * @return the resultant matrix
- */
+
 Mat Mat::operator+(const Mat &right) {
     return {VecA + right.VecA, VecB + right.VecB, VecC + right.VecC};
 }
 
-/**
- * subtraction of two matrices
- * @param right
- * @return the resultant matrix
- */
 Mat Mat::operator-(const Mat &right) {
     return {VecA - right.VecA, VecB - right.VecB, VecC - right.VecC};
 }
 
-/**
- * Matrix multiplication
- * @param right
- * @return the product of LHS*RHS
- */
 Mat Mat::operator*(const Mat &right){
 
     Vec3 X(right.VecA.getX(), right.VecB.getX(), right.VecC.getX());
@@ -105,56 +64,29 @@ Mat Mat::operator*(const Mat &right){
     return {VecA, VecB, VecC};
 }
 
-/**
- * scalar multiplication of a matrix
- * @param right
- * @return the scalar factored matrix
- */
 Mat Mat::operator*(const double &right) {
     return {VecA * right, VecB * right, VecC * right};
 }
 
-/**
- * inverse matrix multiplication
- * @param right
- * @return the product of LHS * RHS^-1
- */
 Mat Mat::operator/(const Mat &right) {
     return {*this * right.inverse()};
 }
 
-/**
- * scalar division of a matrix
- * @param right
- * @return the factored matrix
- */
 Mat Mat::operator/(const double &right) {
     return {VecA / right, VecB / right , VecC / right};
 }
 
-/**
- * checks if lhs = rhs
- * @param rhs
- * @return true if left and right are the same
- */
 bool Mat::operator==(const Mat &rhs) const {
     return VecA == rhs.VecA &&
            VecB == rhs.VecB &&
            VecC == rhs.VecC;
 }
-/**
- * checks if lhs != rhs
- * @param rhs
- * @return True if left and right are different
- */
+
 bool Mat::operator!=(const Mat &rhs) const {
     return !(rhs == *this);
 }
 
-/**
- * Calculates the determinant of a martix
- * @return the determinant
- */
+
 double Mat::calcDet() const{
     double a, b, c, d;
     std::array<double, 3> det{0};
@@ -186,10 +118,7 @@ double Mat::calcDet() const{
     return std::accumulate(det.begin(),det.end(), 0.0);
 
 }
-/**
- * transposes a matrix
- * @return the transposed matrix
- */
+
 Mat Mat::transpose() const{
     Mat out = *this;
 
@@ -206,10 +135,6 @@ Mat Mat::transpose() const{
 
 }
 
-/**
- * inverts a matrix
- * @return the inverted matrix
- */
 Mat Mat::inverse() const{
     double Det;
     Mat out = this->transpose();
@@ -226,10 +151,6 @@ Mat Mat::inverse() const{
     return {out};
 }
 
-/**
- * creates a matrix of determinants using 2x2 minor matrices
- * @return matrix of determinants
- */
 Mat Mat::detMatrix(){
     Mat out;
     double a, b, c, d;
@@ -311,11 +232,9 @@ Mat Mat::detMatrix(){
 }
 
 /**
- * creates cofactor matrix from current matrix
  * |+ - + |
  * |- + - |
  * |+ - + |
- * @return cofactor matrix
  */
 Mat Mat::cofactor(){
     Mat out = *this;
@@ -326,14 +245,7 @@ Mat Mat::cofactor(){
     return out;
 }
 
-/**
- *  Generate Array of Rotation Matrices x, y, z
- * @param xRads
- * @param yRads
- * @param zRads
- * @return Array{X Rotation matrix, Y Rotation matrix, Z Rotation matrix}
- */
-std::array<Mat, 3> genRotation(double xRads, double yRads, double zRads) {
+ std::array<Mat, 3> genRotation(double xRads, double yRads, double zRads) {
     std::array<Mat, 3>Rotation;
     Rotation[0].populate(1, 0, 0, 0, std::cos(xRads), std::sin(xRads), 0, -std::sin(xRads), std::cos(xRads));
     Rotation[1].populate(std::cos(yRads), 0, -std::sin(yRads), 0, 1, 0, std::sin(yRads), 0, std::cos(yRads));
@@ -342,18 +254,6 @@ std::array<Mat, 3> genRotation(double xRads, double yRads, double zRads) {
     return Rotation;
 }
 
-/**
- * fills a matrix with 9 arguments
- * @param a
- * @param b
- * @param c
- * @param d
- * @param e
- * @param f
- * @param g
- * @param h
- * @param i
- */
 void Mat::populate(double a, double b, double c,
                 double d, double e, double f,
                 double g, double h, double i){
@@ -368,12 +268,7 @@ void Mat::populate(double a, double b, double c,
     this->VecC.setZ(i);
 }
 
-/**
- * stream output for displaying a matrix
- * @param os
- * @param Mat
- * @return
- */
+
 std::ostream& operator<<(std::ostream& os, const Mat& Mat)
 {
     Vec3 X(Mat.VecA.getX(), Mat.VecB.getX(), Mat.VecC.getX());

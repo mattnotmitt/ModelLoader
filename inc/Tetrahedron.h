@@ -26,7 +26,22 @@ public:
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)
+
+    /**
+     * calculates volume of tetrahedron
+     * @return volume
+     */
     double calcVolume() const override;
+
+    /**
+     * Calculates CoG of tetrahedron
+     * @return Centre of Gravity
+     */
     Vec3 calcCentreofGravity() const override;
+
+    /**
+     * Calculates Weight of tetrahedron
+     * @return Weight
+     */
     double calcWeight() const override;
 };
