@@ -44,21 +44,21 @@ Mat Mat::operator-(const Mat &right) {
 
 Mat Mat::operator*(const Mat &right){
 
-    Vec3 X(right.VecA.getX(), right.VecB.getX(), right.VecC.getX());
-    Vec3 Y(right.VecA.getY(), right.VecB.getY(), right.VecC.getY());
-    Vec3 Z(right.VecA.getZ(), right.VecB.getZ(), right.VecC.getZ());
+    Vec3 X(this->VecA.getX(), this->VecB.getX(), this->VecC.getX());
+    Vec3 Y(this->VecA.getY(), this->VecB.getY(), this->VecC.getY());
+    Vec3 Z(this->VecA.getZ(), this->VecB.getZ(), this->VecC.getZ());
 
-    VecA.setX(X.dot(VecA)); // ( - - - )   ( |     )
-    VecB.setX(X.dot(VecB)); // (       ) o ( |     )
-    VecC.setX(X.dot(VecC)); // (       )   ( |     )
+    VecA.setX(X.dot(right.VecA)); // ( - - - )
+    VecB.setX(X.dot(right.VecB)); // (       )
+    VecC.setX(X.dot(right.VecC)); // (       )
 
-    VecA.setY(Y.dot(VecA));// (       )   (   |   )
-    VecB.setY(Y.dot(VecB));// ( - - - ) o (   |   )
-    VecC.setY(Y.dot(VecC));// (       )   (   |   )
+    VecA.setY(Y.dot(right.VecA));// (       )
+    VecB.setY(Y.dot(right.VecB));// ( - - - )
+    VecC.setY(Y.dot(right.VecC));// (       )
 
-    VecA.setZ(Z.dot(VecA));// (       )   (      |)
-    VecB.setZ(Z.dot(VecB));// (       ) o (      |)
-    VecC.setZ(Z.dot(VecC));// ( - - - )   (      |)
+    VecA.setZ(Z.dot(right.VecA));// (       )
+    VecB.setZ(Z.dot(right.VecB));// (       )
+    VecC.setZ(Z.dot(right.VecC));// ( - - - )
 
 
     return {VecA, VecB, VecC};
