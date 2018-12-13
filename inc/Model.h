@@ -43,6 +43,7 @@ public:
 
     // Main functions
     void loadFile(std::string &filePath);
+    void saveModel(std::string &filePath);
 
     friend std::ofstream &operator<<(std::ofstream &os, const Model &model);
 };

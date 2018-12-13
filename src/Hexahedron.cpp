@@ -15,6 +15,10 @@ Hexahedron::Hexahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::sh
     this->CellType = Cell::Type::HEXAHEDRON;
 }
 
+/**
+ * Adds volume of the three constituent pyramids that make up hexahedron
+ * @return
+ */
 double Hexahedron::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     double volume, volume1, volume2, volume3 = 0;
@@ -34,6 +38,10 @@ double Hexahedron::calcVolume() const {
     return volume;
 };
 
+/**
+ * Sum all vertices and divide by 8 to find centre of gravity
+ * @return
+ */
 Vec3 Hexahedron::calcCentreofGravity() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     Vec3 cog;
@@ -42,6 +50,10 @@ Vec3 Hexahedron::calcCentreofGravity() const {
     return cog;
 }
 
+/**
+ * Multiply volume and density of material to find weight of Cell
+ * @return
+ */
 double Hexahedron::calcWeight() const {
     const Material material = *getCellMaterial();
     const double volume = getVolume();

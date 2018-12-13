@@ -3,23 +3,29 @@
 //
 #include <string>
 #include <ostream>
+#include <array>
 #include "Model.h"
-#include <fstream>
 
 int main (int argc, char** argv) {
-    std::string filePath = "../test/ExampleModel2.mod";
-    try {
-        Model ExampleModel1(filePath);
-        std::cout << "File loaded successfully. " 
-            << ExampleModel1.getCells().size() << " cells, " 
-            << ExampleModel1.getVertices().size() << " vertices & " 
-            << ExampleModel1.getMaterials().size() << " materials." << std::endl;
-        std::ofstream OutputC;
-        OutputC.open("Output.mod");
-        OutputC << ExampleModel1 << std::endl;
-        OutputC.close();
-    } catch (std::runtime_error &e) {
-        throw e;
+    std::array<std::array<std::string, 2>, 4> testFiles = {{
+            {"../test/ExampleModel1.mod", "outfile1.mod"},
+            {"../test/ExampleModel2.mod", "outfile2.mod"},
+            {"../test/ExampleModel3.mod", "outfile3.mod"},
+            {"../test/ExampleModel4.mod", "outfile4.mod"},
+    }};
+    for (auto const& test: testFiles) {
+        std::string infilePath = test[0];
+        std::string outfilePath = test[1];
+        try {
+            Model ExampleModel(infilePath);
+            std::cout << "File loaded successfully. "
+                      << ExampleModel.getCells().size() << " cells, "
+                      << ExampleModel.getVertices().size() << " vertices & "
+                      << ExampleModel.getMaterials().size() << " materials." << std::endl;
+            ExampleModel.saveModel(outfilePath);
+        } catch (std::runtime_error &e) {
+            throw e;
+        }
     }
     return 0;
 }

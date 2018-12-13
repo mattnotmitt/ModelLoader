@@ -9,44 +9,47 @@ Model::Model(std::string &filePath) {
 };
 
 void Model::loadFile(std::string &filePath) {
-    std::ifstream infile(filePath);
+    std::ifstream infile(filePath); // Open input file
     if (!infile.is_open()) {
-
+        throw std::runtime_error("Could not open input file.");
     }
     std::string line;
     int lineNum = 0;
     try {
-        while (std::getline(infile, line)) {
-            if (line == "\r" || line == "\n") continue;
+        while (std::getline(infile, line)) { // Get line from file and store in line variable
+            if (line == "\r" || line == "\n") continue; // Skip line if only contains newline
             lineNum++;
             std::istringstream iss(line);
-            if (iss.str().empty()) continue;
+            if (iss.str().empty()) continue; // Skip line if stream is empty
             char type;
             int index;
 
-            iss >> type >> index;
+            iss >> type >> index; // read in type and index values
             switch (type) {
                 case 'm': { // Parse material declaration line
-                    if (Materials.count(index) != 0) throw "Material " + std::to_string(index) + " already declared.";
-                    Material mat;
-                    mat.setIndex(index);
-                    iss >> mat;
+                    if (Materials.count(index) != 0) // Check if material already declared
+                        throw "Material " + std::to_string(index) + " already declared.";
+                    Material mat; // Create instance of material
+                    mat.setIndex(index); // Set index of material for outputting
+                    iss >> mat; // Read data into mat class
 
-                    std::cout << mat << std::endl;
-                    Materials.emplace(index, mat);
+                    std::cout << mat << std::endl; // Print info about material
+                    Materials.emplace(index, mat); // Store in Model's map of materials
                     break;
                 }
                 case 'v': { // Parse vertex declaration line
-                    if (Vertices.count(index) != 0) throw "Vertex " + std::to_string(index) + " already declared.";
+                    if (Vertices.count(index) != 0) // Check if vertex already declared
+                        throw "Vertex " + std::to_string(index) + " already declared.";
                     Vec3 vec;
                     vec.setIndex(index);
-                    iss >> vec;
+                    iss >> vec; // Read data into vector class
                     //std::cout << "Vertex " << index << ": " << vec << std::endl;
-                    Vertices.emplace(index, vec);
+                    Vertices.emplace(index, vec); // Store in model's map of vertices
                     break;
                 }
                 case 'c': { // Parse cell declaration line
-                    if (Cells.count(index) != 0) throw "Cell " + std::to_string(index) + " already declared.";
+                    if (Cells.count(index) != 0) // Check if cell is already declared
+                        throw "Cell " + std::to_string(index) + " already declared.";
                     std::shared_ptr<Cell> cell;
                     char cellType;
                     int materialIndex, vertexIndex, vertexCount;
@@ -54,41 +57,44 @@ void Model::loadFile(std::string &filePath) {
 
                     iss >> cellType >> materialIndex;
 
-                    switch (cellType) {
+                    switch (cellType) { // Select cell type
                         case 'h': {
+                            // Create shared pointer to hexahedron cell type with pointer to material and the cell's index
                             cell = std::make_shared<Hexahedron>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 8;
                             break;
                         }
                         case 'p': {
+                            // Create shared pointer to pyramid cell type with pointer to material and the cell's index
                             cell = std::make_shared<Pyramid>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 5;
                             break;
                         }
                         case 't': {
+                            // Create shared pointer to tetrahedron cell type with pointer to material and the cell's index
                             cell = std::make_shared<Tetrahedron>(std::make_shared<Material>(Materials.at(materialIndex)), index);
                             vertexCount = 4;
                             break;
                         }
-                        default:
+                        default: // Rejects if cell not recognised
                             throw "Invalid cell type " + std::to_string(cellType) + " specified.";
                     }
 
-                    while (iss >> vertexIndex) {
-                        if (Vertices.count(vertexIndex) == 0) {
+                    while (iss >> vertexIndex) { // Load in vertex indexes
+                        if (Vertices.count(vertexIndex) == 0) { // Make sure vertex exists
                             throw "Vertex " + std::to_string(vertexIndex) + " not found.";
-                        } else {
+                        } else { // Adds vertex to list of cell vertices
                             cellVertices.push_back(std::make_shared<Vec3>(Vertices.at(vertexIndex)));
                         }
                     }
 
-                    if (cellVertices.size() != vertexCount) {
+                    if (cellVertices.size() != vertexCount) { // Checks if too many vertices have been loaded for cell type
                         throw "Number of vertices too large for specified cell type.";
                     }
 
-                    cell->setCellVertices(cellVertices);
-                    std::cout << *cell << std::endl;
-                    Cells.emplace(index, std::move(cell));
+                    cell->setCellVertices(cellVertices); // Store list of cell vertices
+                    std::cout << *cell << std::endl; // Output details about cell
+                    Cells.emplace(index, std::move(cell)); // Store cell in Model map of cells
                     break;
                 }
                 case '#':
@@ -99,6 +105,7 @@ void Model::loadFile(std::string &filePath) {
             }
         }
     } catch (std::string &msg) {
+        // Throw error with information about where issue is in file
         throw std::runtime_error("Error on line " + std::to_string(lineNum) + " in " + filePath + ": " + msg);
     }
 }
@@ -126,20 +133,34 @@ void Model::setCells(std::map<int, std::shared_ptr<Cell>> &Cells) {
 void Model::setVertices(const std::map<int, Vec3> &Vertices) {
     Model::Vertices = Vertices;
 }
+/**
+ * Saves copy of model to specified file
+ * @param filePath
+ */
+void Model::saveModel(std::string &filePath) {
+    std::ofstream outfile;
+    outfile.open(filePath);
+    if (!outfile.is_open()) {
+        throw std::runtime_error("Could not open output file.");
+    }
+    outfile << *this << std::endl; // Use overloaded output operator
+    outfile.close();
+}
 
 std::ofstream &operator<<(std::ofstream &os, const Model &model) {
-    //TODO: when this is called output the file as it looks in the input
     std::map<int, Material> materials = model.getMaterials();
     std::map<int, Vec3> vertices = model.getVertices();
     std::map<int, std::shared_ptr<Cell>> cells = model.getCells();
 
-    for (const auto& material: materials){
+    for (const auto& material: materials){ // Loop through materials and save information about them to file
         os << material.second << std::endl;
     }
-    for (const auto& vertex: vertices){
+    os << std::endl;
+    for (const auto& vertex: vertices){ // Loop through vertices and save information about them to file
         os << vertex.second << std::endl;
     }
-    for (const auto& cell: cells){
+    os << std::endl;
+    for (const auto& cell: cells){ // Loop through cells and save information about them to file
         os << *cell.second << std::endl;
     }
 

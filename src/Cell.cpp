@@ -39,7 +39,12 @@ const Vec3 Cell::getCentreOfGravity() const {
 double Cell::getWeight() const {
     return this->calcWeight();
 }
-
+/**
+ * Output details about cell to cout
+ * @param os
+ * @param cell
+ * @return
+ */
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     std::map<Cell::Type, std::string> CellString {
         {Cell::Type::TETRAHEDRON, "Tetrahedron"},
@@ -54,17 +59,28 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     return os;
 };
 
+/**
+ * De-references
+ * @param vertex
+ * @return
+ */
 int retrieveIndex (std::shared_ptr<Vec3> vertex) {
     return vertex->getIndex();
 }
 
+/**
+ * Output details about cell to file
+ * @param os
+ * @param cell
+ * @return
+ */
 std::ofstream &operator<<(std::ofstream &os, const Cell &cell) {
     std::map<Cell::Type, std::string> CellString {
             {Cell::Type::TETRAHEDRON, "t"},
             {Cell::Type::PYRAMID, "p"},
             {Cell::Type::HEXAHEDRON, "h"}
     };
-    os  << "c " << cell.getIndex() << " " << CellString[cell.CellType] << " " << cell.getCellMaterial()->getIndex();
+    os << "c " << cell.getIndex() << " " << CellString[cell.CellType] << " " << cell.getCellMaterial()->getIndex();
 
     const std::vector<std::shared_ptr<Vec3>> vertices = cell.getCellVertices();
     std::vector<int> VertexIndexes;
