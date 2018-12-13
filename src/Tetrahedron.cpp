@@ -20,9 +20,10 @@ Tetrahedron::Tetrahedron(std::vector<std::shared_ptr<Vec3>> &CellVertices, std::
 double Tetrahedron::calcVolume() const {
     const std::vector<std::shared_ptr<Vec3>> vertices = getCellVertices();
     double volume;
-    Vec3 magnitude;
-    magnitude = (*vertices[0] * *vertices[1]);
-    volume = magnitude.dot(*vertices[2])/6;
+    Vec3 A = *vertices[0] - *vertices[1]; //VectA
+    Vec3 B = *vertices[0] - *vertices[3]; //VectB
+    Vec3 C = *vertices[0] - *vertices[4]; //VectC
+    volume = std::abs((A*B).dot(C)) * (1.0/6.0);
     return volume;
 }
 
