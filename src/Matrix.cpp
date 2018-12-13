@@ -142,7 +142,7 @@ Mat Mat::inverse() const{
     out = out.detMatrix();
     out = out.cofactor();
     if (Det!= 0) {
-        out = out * (1 / Det);
+        out = out  / Det;
     }
     else {
         throw;
