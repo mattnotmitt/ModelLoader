@@ -32,3 +32,4 @@
 
 # CMake Output
 cmake-build-debug/
+build/
