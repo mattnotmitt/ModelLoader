@@ -33,7 +33,7 @@ void Model::loadFile(std::string &filePath) {
                     mat.setIndex(index); // Set index of material for outputting
                     iss >> mat; // Read data into mat class
 
-                    std::cout << mat << std::endl; // Print info about material
+                    std::cout << "DEBUG | " << mat << std::endl; // Print info about material
                     Materials.emplace(index, mat); // Store in Model's map of materials
                     break;
                 }
@@ -43,7 +43,7 @@ void Model::loadFile(std::string &filePath) {
                     Vec3 vec;
                     vec.setIndex(index);
                     iss >> vec; // Read data into vector class
-                    //std::cout << "Vertex " << index << ": " << vec << std::endl;
+                    std::cout << "TRACE | Vertex " << index << ": " << vec << std::endl;
                     Vertices.emplace(index, vec); // Store in model's map of vertices
                     break;
                 }
@@ -93,7 +93,7 @@ void Model::loadFile(std::string &filePath) {
                     }
 
                     cell->setCellVertices(cellVertices); // Store list of cell vertices
-                    std::cout << *cell << std::endl; // Output details about cell
+                    std::cout << "DEBUG | " << *cell << std::endl; // Output details about cell
                     Cells.emplace(index, std::move(cell)); // Store cell in Model map of cells
                     break;
                 }

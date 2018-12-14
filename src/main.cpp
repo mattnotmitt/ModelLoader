@@ -17,12 +17,14 @@ int main (int argc, char** argv) {
         std::string infilePath = test[0];
         std::string outfilePath = test[1];
         try {
+            std::cout << "INFO | Loading " << infilePath << "." << std::endl;
             Model ExampleModel(infilePath);
-            std::cout << "File loaded successfully. "
+            std::cout << "INFO | File " << infilePath << " loaded successfully. "
                       << ExampleModel.getCells().size() << " cells, "
                       << ExampleModel.getVertices().size() << " vertices & "
                       << ExampleModel.getMaterials().size() << " materials." << std::endl;
             ExampleModel.saveModel(outfilePath);
+            std::cout << "INFO | Saved copy of model to " << outfilePath << "." << std::endl << std::endl;
         } catch (std::runtime_error &e) {
             throw e;
         }

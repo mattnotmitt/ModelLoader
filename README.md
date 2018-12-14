@@ -11,12 +11,15 @@ make [optional: ModelLoader | ModelLoaderTest | ModelLoaderNormal] -jN # N speci
 ```
 
 ## Running
-Unit tests can be run by using:
+Unit tests can be run by using (omit the grep pipe at the end if you want to see debug output):
 ```sh
-./ModelLoaderTest
+./ModelLoaderTest --use-colour yes | grep -Ev "INFO|DEBUG|TRACE" --color=never
 ```
 
-Test application which loads files and outputs can be run using:
+Test application which loads files and outputs can be run using (edit or omit the grep to view debug info including full details on loaded cells, vertices and mats):
 ```sh
-./ModelLoaderNormal
+./ModelLoaderNormal | grep -Ev "DEBUG|TRACE"
 ```
+
+## OpenGL
+Preliminary OpenGL/GLUT support can be found in the glut branch.
