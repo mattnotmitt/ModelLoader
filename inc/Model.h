@@ -14,6 +14,7 @@
 #include "Hexahedron.h"
 #include "Material.h"
 #include "Model.h"
+#include "ModelRenderer.h"
 #include "Pyramid.h"
 #include "Tetrahedron.h"
 
@@ -46,4 +47,5 @@ public:
     void saveModel(std::string &filePath);
 
     friend std::ofstream &operator<<(std::ofstream &os, const Model &model);
+    ModelRenderer render(int argc, char** argv);
 };

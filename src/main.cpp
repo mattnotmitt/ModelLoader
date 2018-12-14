@@ -23,6 +23,7 @@ int main (int argc, char** argv) {
                       << ExampleModel.getVertices().size() << " vertices & "
                       << ExampleModel.getMaterials().size() << " materials." << std::endl;
             ExampleModel.saveModel(outfilePath);
+            ExampleModel.render(argc, argv);
         } catch (std::runtime_error &e) {
             throw e;
         }

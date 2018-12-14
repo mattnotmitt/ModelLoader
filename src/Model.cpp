@@ -2,6 +2,8 @@
 // Created by matt on 08/11/18.
 //
 
+#include <Model.h>
+
 #include "Model.h"
 
 Model::Model(std::string &filePath) {
@@ -165,4 +167,8 @@ std::ofstream &operator<<(std::ofstream &os, const Model &model) {
     }
 
     return os;
+}
+
+ModelRenderer Model::render(int argc, char **argv) {
+    return ModelRenderer(argc, argv);
 }
