@@ -28,7 +28,7 @@ void Model::loadFile(std::string &filePath) {
             switch (type) {
                 case 'm': { // Parse material declaration line
                     if (Materials.count(index) != 0) // Check if material already declared
-                        throw "Material " + std::to_string(index) + " already declared.";
+                        throw std::string("Material " + std::to_string(index) + " already declared.");
                     Material mat; // Create instance of material
                     mat.setIndex(index); // Set index of material for outputting
                     iss >> mat; // Read data into mat class
@@ -39,7 +39,7 @@ void Model::loadFile(std::string &filePath) {
                 }
                 case 'v': { // Parse vertex declaration line
                     if (Vertices.count(index) != 0) // Check if vertex already declared
-                        throw "Vertex " + std::to_string(index) + " already declared.";
+                        throw std::string("Vertex " + std::to_string(index) + " already declared.");
                     Vec3 vec;
                     vec.setIndex(index);
                     iss >> vec; // Read data into vector class
@@ -49,7 +49,7 @@ void Model::loadFile(std::string &filePath) {
                 }
                 case 'c': { // Parse cell declaration line
                     if (Cells.count(index) != 0) // Check if cell is already declared
-                        throw "Cell " + std::to_string(index) + " already declared.";
+                        throw std::string("Cell " + std::to_string(index) + " already declared.");
                     std::shared_ptr<Cell> cell;
                     char cellType;
                     int materialIndex, vertexIndex, vertexCount;
@@ -77,19 +77,19 @@ void Model::loadFile(std::string &filePath) {
                             break;
                         }
                         default: // Rejects if cell not recognised
-                            throw "Invalid cell type " + std::to_string(cellType) + " specified.";
+                            throw std::string("Invalid cell type " + std::to_string(cellType) + " specified.");
                     }
 
                     while (iss >> vertexIndex) { // Load in vertex indexes
                         if (Vertices.count(vertexIndex) == 0) { // Make sure vertex exists
-                            throw "Vertex " + std::to_string(vertexIndex) + " not found.";
+                            throw std::string("Vertex " + std::to_string(vertexIndex) + " not found.");
                         } else { // Adds vertex to list of cell vertices
                             cellVertices.push_back(std::make_shared<Vec3>(Vertices.at(vertexIndex)));
                         }
                     }
 
                     if (cellVertices.size() != vertexCount) { // Checks if too many vertices have been loaded for cell type
-                        throw "Number of vertices too large for specified cell type.";
+                        throw std::string("Number of vertices too large for specified cell type.");
                     }
 
                     cell->setCellVertices(cellVertices); // Store list of cell vertices
@@ -101,7 +101,7 @@ void Model::loadFile(std::string &filePath) {
                     //std::cout << "Comment" << std::endl;
                     break;
                 default:
-                    throw "Unknown character.";
+                    throw std::string("Unknown character.");
             }
         }
     } catch (std::string &msg) {
