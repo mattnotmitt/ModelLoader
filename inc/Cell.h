@@ -9,6 +9,8 @@
 #include <iomanip>
 #include <memory>
 #include <vector>
+#include <map>
+#include <string>
 
 #include "Vec3.h"
 #include "Material.h"
