@@ -90,31 +90,31 @@ public:
      * @param right
      * @return the resultant vector
      */
-    Vec3 operator+(const Vec3& right);
+    Vec3 operator+(const Vec3& right) const;
     /**
      * Subtraction of two Vec3s
      * @param right
      * @return
      */
-    Vec3 operator-(const Vec3& right);
+    Vec3 operator-(const Vec3& right) const;
     /**
      * Multiplication of a Vec3 by a scalar
      * @param right
      * @return scalar factored vector
      */
-    Vec3 operator*(const double& right);
+    Vec3 operator*(const double& right) const;
     /**
      * Cross product of two Vec3s
      * @param right
      * @return Cross product
      */
-    Vec3 operator*(const Vec3& right);
+    Vec3 operator*(const Vec3& right) const;
     /**
      * Division of a Vec3 by a scalar
      * @param right
      * @return vector factored by a scalar
      */
-    Vec3 operator/(const double& right);
+    Vec3 operator/(const double& right) const;
     /**
      * checks if lhs = rhs
      * @param rhs

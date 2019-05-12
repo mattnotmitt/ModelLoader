@@ -47,26 +47,25 @@ void Vec3::setIndex(int index) {
 }
 
 
-Vec3 Vec3::operator+(const Vec3 &right) {
+Vec3 Vec3::operator+(const Vec3 &right) const {
     return {x + right.x, y + right.y, z + right.z};
 }
 
-
-Vec3 Vec3::operator-(const Vec3 &right) {
+Vec3 Vec3::operator-(const Vec3 &right) const {
     return {x - right.x, y - right.y, z - right.z};
 }
 
-Vec3 Vec3::operator*(const double &right) {
+Vec3 Vec3::operator*(const double &right) const {
     return {x * right, y * right, z * right};
 }
 
-Vec3 Vec3::operator*(const Vec3 &right) {
+Vec3 Vec3::operator*(const Vec3 &right) const {
     return {y * right.z - z * right.y,
             z * right.x - x * right.z,
             x * right.y - y * right.x};
 }
 
-Vec3 Vec3::operator/(const double &right) {
+Vec3 Vec3::operator/(const double &right) const {
     return {x / right, y / right, z / right};
 }
 
@@ -85,14 +84,14 @@ double Vec3::dot(const Vec3 &right) {
     return x*right.x + y*right.y + z*right.z;
 }
 
-double Vec3::mag(){
+double Vec3::mag() {
     return sqrt(x*x + y*y + z*z);
 }
 
 
 std::ostream& operator<<(std::ostream& os, const Vec3& vec)
 {
-    os << std::fixed << std::setprecision(3) <<'[' << vec.getX() << ',' << vec.getY() << ',' << vec.getZ() << ']';
+    os << std::fixed << std::setprecision(10) <<'[' << vec.getX() << ',' << vec.getY() << ',' << vec.getZ() << ']';
     return os;
 }
 

@@ -45,6 +45,9 @@ public:
     // Main functions
     void loadFile(std::string &filePath);
     void saveModel(std::string &filePath);
+    Vec3 calcCentreOfGravity();
+    double calcWeight();
+    double calcVolume();
 
     friend std::ofstream &operator<<(std::ofstream &os, const Model &model);
 };

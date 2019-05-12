@@ -2,6 +2,8 @@
 // Created by matt on 08/11/18.
 //
 
+#include <inc/Model.h>
+
 #include "Model.h"
 
 Model::Model(std::string &filePath) {
@@ -133,10 +135,7 @@ void Model::setCells(std::map<int, std::shared_ptr<Cell>> &Cells) {
 void Model::setVertices(const std::map<int, Vec3> &Vertices) {
     Model::Vertices = Vertices;
 }
-/**
- * Saves copy of model to specified file
- * @param filePath
- */
+
 void Model::saveModel(std::string &filePath) {
     std::ofstream outfile;
     outfile.open(filePath);
@@ -165,4 +164,32 @@ std::ofstream &operator<<(std::ofstream &os, const Model &model) {
     }
 
     return os;
+}
+
+Vec3 Model::calcCentreOfGravity() {
+    Vec3 weightedTotal;
+    for (const auto& cellPair: getCells()) {
+        auto cell = cellPair.second;
+        auto weightedCOG = cell->getCentreOfGravity() * cell->getWeight();
+        weightedTotal = weightedTotal + weightedCOG;
+    }
+    return weightedTotal / calcWeight();
+}
+
+double Model::calcWeight() {
+    double weight = 0;
+    for (const auto& cellPair: getCells()) {
+        auto cell = cellPair.second;
+        weight += cell->getWeight();
+    }
+    return weight;
+}
+
+double Model::calcVolume() {
+    double volume = 0;
+    for (const auto& cellPair: getCells()) {
+        auto cell = cellPair.second;
+        volume += cell->getVolume();
+    }
+    return volume;
 }
