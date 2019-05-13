@@ -9,6 +9,10 @@
 #include "Vec3.h"
 
 /**
+ * Matrix Class Definitions
+ */
+
+/**
  * 3x3 Matrix Class
  */
 class Mat {

@@ -4,6 +4,10 @@
 
 #pragma once
 
+/**
+ * @file Cell class definitions
+ */
+
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
@@ -25,6 +29,9 @@ private:
     int index = -1;
 
 public:
+    /**
+     * Holds type of current Cell
+     */
     enum class Type {
         NONE,
         TETRAHEDRON,

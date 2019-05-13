@@ -4,6 +4,10 @@
 
 #pragma once
 
+/**
+ * @file Hexahedron Class Definitions
+ */
+
 #include <cmath>
 #include "Cell.h"
 
@@ -20,7 +24,21 @@ public:
 
     // const keyword disallows modification of class by function
     // override keyword marks as overwriting virtual keyword from base class (Cell)
+    /**
+     * Calculates volume of hexahedron
+     * @return volume
+     */
     double calcVolume() const override;
+
+    /**
+     * Calculates CoG of hexahedron
+     * @return Centre of Gravity
+     */
     Vec3 calcCentreofGravity() const override;
+
+    /**
+     * Calculates Weight of hexahedron
+     * @return Weight
+     */
     double calcWeight() const override;
 };

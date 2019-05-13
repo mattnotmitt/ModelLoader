@@ -9,6 +9,10 @@
 #include <cmath>
 #include <fstream>
 
+/**
+ * @file Vec3 Class Definitions
+ */
+
 class Vec3 {
 private:
     int index = -1;

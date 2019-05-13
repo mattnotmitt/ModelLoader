@@ -8,6 +8,11 @@
 #include <algorithm>
 #include "Cell.h"
 
+
+/**
+ * @file Tetrahedron Class Definitions
+ */
+
 class Tetrahedron : public Cell {
 public:
     Tetrahedron();
@@ -21,7 +26,7 @@ public:
     // override keyword marks as overwriting virtual keyword from base class (Cell)
 
     /**
-     * calculates volume of tetrahedron
+     * Calculates volume of tetrahedron
      * @return volume
      */
     double calcVolume() const override;
